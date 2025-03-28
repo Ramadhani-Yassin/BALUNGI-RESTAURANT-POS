@@ -56,7 +56,7 @@ Make sure you have **XAMPP** installed to run the **PHP** and **MySQL** server. 
 
 ### **5️⃣ Start the Local Server**  
 - Ensure **Apache** and **MySQL** services are running from the **XAMPP Control Panel**.  
-- Access the project by navigating to `http://localhost/Balungi/` in your browser.
+- Access the project by navigating to `http://localhost/Balungi-Restaurant-POS/` in your browser.
 
 ---
 
@@ -83,3 +83,8 @@ This project is licensed under the **MT License**.
 > Find me on [GitHub](https://github.com/your-username) | [LinkedIn](https://www.linkedin.com/in/your-profile/)
 ```
 
+### Customization:
+- Replace `your-repository` in the GitHub URL with the actual repository name.
+- Update the GitHub and LinkedIn URLs to your personal or business profiles.
+
+Let me know if you need any more modifications! 🚀
