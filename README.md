@@ -1,8 +1,4 @@
 
-
----
-
-```md
 # 🍽️ Balungi Restaurant & POS System  
 
 **A modern Restaurant Management & Point-of-Sale Solution**  
