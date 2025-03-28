@@ -1,4 +1,4 @@
-
+Here's a custom `README.md` for **Balungi Restaurant and POS System** developed by **Resilient Matrix Technologies (RM TECH)**, using **PHP**, **MySQL**, and **XAMPP**:
 
 ```md
 # ✨ Balungi Restaurant and POS System
