@@ -97,9 +97,11 @@ POST /api/inventory - Updates stock levels
 **MT License** © 2024 Resilient Matrix Technologies  
 *"Transforming Hospitality Through Technology"*  
 
-📞 **Contact Us:**  
-- [GitHub](https://github.com/Ramadhani-Yassin)  
-- [LinkedIn](https://www.linkedin.com/in/ramadhani-yassin-ramadhani/)
-- [Email](mailto:yasynramah@gmail.com)  
+## 🏆 Developed by  
+
+**Resilient Matrix Technologies (RM TECH)**  
+📍 **Empowering Businesses with Smart Tech & Financial Solutions | EST. 29 Nov 2022**  
+
+> Find me on [GitHub](https://github.com/Ramadhani-Yassin) | [LinkedIn](https://www.linkedin.com/in/ramadhani-yassin-ramadhani/) | [Email](mailto:yasynramah@gmail.com) | [Instagram](https://www.instagram.com/rm_tech.tz/)  
 
 ```
