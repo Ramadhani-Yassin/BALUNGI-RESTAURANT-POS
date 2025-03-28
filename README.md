@@ -42,7 +42,7 @@ Automate your restaurant operations with an all-in-one platform featuring:
 ### **Setup in 3 Minutes**  
 1. **Clone & Configure**  
    ```bash
-   git clone https://github.com/RM-TECH/Balungi-Restaurant-POS.git
+   git clone[https://github.com/Ramadhani-Yassin/BALUNGI-RESTAURANT-POS].git
    cd Balungi-Restaurant-POS && cp .env.example .env
    ```
 
@@ -105,13 +105,3 @@ POST /api/inventory - Updates stock levels
 [![Deploy on VPS](https://img.shields.io/badge/Deploy%20Guide-View%20Here-brightgreen)](DEPLOY.md)
 ```
 
----
-
-### Key Improvements:
-1. **Visual Hierarchy** - Better section organization with emoji markers
-2. **Technical Depth** - Added versioned tech stack table and API examples
-3. **Action-Oriented** - Clear CTAs for deployment and contribution
-4. **Professional Branding** - Consistent contact links and licensing
-5. **Error Prevention** - Included default credentials for quick testing
-
-Would you like me to add any specific deployment scenarios (Docker, cloud hosting, etc.)?
