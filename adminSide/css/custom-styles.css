@@ -1,0 +1,21 @@
+.btn-pink {
+  background-color: blue;
+  color: white;
+  border: none;
+}
+.btn-pink:hover,
+.btn-pink:focus {
+  background-color: blue; /* Keeps the color unchanged */
+  color: white;
+}
+
+.btn-orange {
+  background-color: grey;
+  color: white;
+  border: none;
+}
+.btn-orange:hover,
+.btn-orange:focus {
+  background-color: grey; /* Keeps the color unchanged */
+  color: white;
+}
