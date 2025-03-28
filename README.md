@@ -42,7 +42,7 @@ Automate your restaurant operations with an all-in-one platform featuring:
 ### **Setup in 3 Minutes**  
 1. **Clone & Configure**  
    ```bash
-   git clone https://github.com/Ramadhani-Yassin/BALUNGI-RESTAURANT-POS.git
+   git clone (https://github.com/Ramadhani-Yassin/BALUNGI-RESTAURANT-POS.git)
    cd Balungi-Restaurant-POS && cp .env.example .env
    ```
 
