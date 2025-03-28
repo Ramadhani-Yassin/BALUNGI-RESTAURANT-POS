@@ -57,7 +57,7 @@ Automate your restaurant operations with an all-in-one platform featuring:
    php -S localhost:8000 -t public
    ```
    *Access admin panel at:* `http://localhost:8000/admin`  
-   *Default credentials:* admin@balungi.com | Pass1234  
+
 
 ---
 
@@ -98,10 +98,9 @@ POST /api/inventory - Updates stock levels
 *"Transforming Hospitality Through Technology"*  
 
 📞 **Contact Us:**  
-- [GitHub](https://github.com/RM-TECH)  
-- [LinkedIn](https://linkedin.com/company/rm-tech)  
-- [Email](mailto:solutions@rmtech.dev)  
+- [GitHub](https://github.com/Ramadhani-Yassin)  
+- [LinkedIn](https://linkedin.com/Ramadhani-Yassin-Ramadhani)  
+- [Email](mailto:yasynramah@gmail.com)  
 
 [![Deploy on VPS](https://img.shields.io/badge/Deploy%20Guide-View%20Here-brightgreen)](DEPLOY.md)
 ```
-
