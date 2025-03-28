@@ -99,8 +99,7 @@ POST /api/inventory - Updates stock levels
 
 📞 **Contact Us:**  
 - [GitHub](https://github.com/Ramadhani-Yassin)  
-- [LinkedIn](https://linkedin.com/Ramadhani-Yassin-Ramadhani)  
+- [LinkedIn](https://www.linkedin.com/in/ramadhani-yassin-ramadhani/)
 - [Email](mailto:yasynramah@gmail.com)  
 
-[![Deploy on VPS](https://img.shields.io/badge/Deploy%20Guide-View%20Here-brightgreen)](DEPLOY.md)
 ```
