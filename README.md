@@ -69,7 +69,7 @@ Automate your restaurant operations with an all-in-one platform featuring:
 | Backend         | PHP (Laravel)        | 10.x     |
 | Frontend        | Bootstrap 5          | 5.3.x    |
 | Database        | MySQL                | 8.0      |
-| PDF Generation  | DomPDF               | 2.0      |
+| PDF Generation  | Fpdf                 | 2.0x     |
 
 ### **API Endpoints**  
 ```http
