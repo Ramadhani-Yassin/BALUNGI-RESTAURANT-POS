@@ -7,7 +7,7 @@ if (file_exists('setup_completed.flag')) {
     define('DB_USER', 'root');
     define('DB_PASS', '');
 
-    // Create Connection
+    // Create Connection of Database
     $link = new mysqli(DB_HOST, DB_USER, DB_PASS);
 
     // Check Connection
@@ -27,7 +27,8 @@ if (file_exists('setup_completed.flag')) {
     $link->select_db('restaurantdb');
 
     // Execute SQL statements from "restaurantdb.txt"
-    function executeSQLFromFile($filename, $link) {
+    function executeSQLFromFile($filename, $link)
+    {
         $sql = file_get_contents($filename);
 
         // Execute the SQL statements
