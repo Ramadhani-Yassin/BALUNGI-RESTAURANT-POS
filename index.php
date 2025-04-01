@@ -1,7 +1,8 @@
 <?php
 // Check if setup has already been completed
 if (file_exists('setup_completed.flag')) {
-    echo "Setup has already been completed. The SQL setup won't run again.";
+    header("Location: customerSide/home/home.php");
+    exit();
 } else {
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
@@ -35,6 +36,10 @@ if (file_exists('setup_completed.flag')) {
             echo "SQL statements executed successfully.";
             // Set the flag to indicate setup is complete
             file_put_contents('setup_completed.flag', 'Setup completed successfully.');
+            
+            // Redirect to home after successful setup
+            header("Location: customerSide/home/home.php");
+            exit();
         } else {
             echo "Error executing SQL statements: " . $link->error;
         }
@@ -47,5 +52,3 @@ if (file_exists('setup_completed.flag')) {
     $link->close();
 }
 ?>
-
-<a href="customerSide/home/home.php">Home</a>
