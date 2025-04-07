@@ -98,11 +98,9 @@ POST /api/inventory - Updates stock levels
 *"Transforming Hospitality Through Technology"*  
 
 ## 🏆 Developed by  
- 
-  **Resilient Matrix Technologies (RM TECH)**  
-📍 **Empowering Businesses with Smart Tech & Financial Solutions | EST. 29 Nov 2022** 
-<div align="center">
 
+<div align="center">
+Resilient Matrix Technologies (RM TECH)
   <a href="https://github.com/Ramadhani-Yassin" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
@@ -115,7 +113,7 @@ POST /api/inventory - Updates stock levels
   <a href="https://www.instagram.com/rm_tech.tz/" target="_blank">
     <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram">
   </a>
-  
+  📍 Empowering Businesses with Smart Tech & Financial Solutions | EST. 29 Nov 2022
 </div>
 
 ```
