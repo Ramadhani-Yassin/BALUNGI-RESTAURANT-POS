@@ -99,7 +99,7 @@ POST /api/inventory - Updates stock levels
 
 ## 🏆 Developed by  
 **Resilient Matrix Technologies | RM TECH**
-**📍 Empowering Businesses with Smart Tech & Financial Solutions | EST. 29 Nov 2022**
+**| Empowering Businesses with Smart Tech & Financial Solutions | EST. 29 Nov 2022**
 <div align="center">
 
   <a href="https://github.com/Ramadhani-Yassin" target="_blank">
