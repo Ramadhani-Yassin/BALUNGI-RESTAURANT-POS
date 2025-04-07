@@ -98,7 +98,7 @@ POST /api/inventory - Updates stock levels
 *"Transforming Hospitality Through Technology"*  
 
 ## 🏆 Developed by  
-**Resilient Matrix Technologies | RM TECH**
+**Resilient Matrix Technologies  (RM TECH)**
 **| Empowering Businesses with Smart Tech & Financial Solutions | EST. 29 Nov 2022**
 <div align="center">
 
