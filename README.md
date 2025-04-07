@@ -102,19 +102,20 @@ POST /api/inventory - Updates stock levels
 **Resilient Matrix Technologies (RM TECH)**  
 📍 **Empowering Businesses with Smart Tech & Financial Solutions | EST. 29 Nov 2022**  
 
-> <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-  <a href="https://github.com/Ramadhani-Yassin" target="_blank" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" style="height: 28px; width: auto; min-width: 80px;">
+<div align="center">
+  <a href="https://github.com/Ramadhani-Yassin" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
-  <a href="https://www.linkedin.com/in/ramadhani-yassin-ramadhani/" target="_blank" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" style="height: 28px; width: auto; min-width: 80px;">
+  <a href="https://www.linkedin.com/in/ramadhani-yassin-ramadhani/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
-  <a href="mailto:yasynramah@gmail.com" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" style="height: 28px; width: auto; min-width: 70px;">
+  <a href="mailto:yasynramah@gmail.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
   </a>
-  <a href="https://www.instagram.com/rm_tech.tz/" target="_blank" style="text-decoration: none;">
-    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" style="height: 28px; width: auto; min-width: 90px;">
+  <a href="https://www.instagram.com/rm_tech.tz/" target="_blank">
+    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram">
   </a>
+  
 </div>
 
 ```
