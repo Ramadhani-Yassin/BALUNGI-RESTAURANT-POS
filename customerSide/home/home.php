@@ -4,7 +4,7 @@
     
 <img src="../image/BALUNGI (1).jpg" alt="Steak on Grill" 
      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(60%);">
-
+     
 
     <div class="hero container" style="position: relative; z-index: 1;">
         <div>
