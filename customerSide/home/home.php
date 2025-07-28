@@ -6,7 +6,6 @@
      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(60%);">
 
 
-
     <div class="hero container" style="position: relative; z-index: 1;">
         <div>
             <h1><strong><h1 class="text-center" style="font-family:Copperplate; color:whitesmoke;"> BALUNGI RESTAURANT</h1><span></span></strong></h1>
