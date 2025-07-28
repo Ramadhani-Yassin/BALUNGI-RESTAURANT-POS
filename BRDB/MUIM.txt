@@ -1,0 +1,58 @@
+https://github.com/BryanTheLai/RestaurantProject?tab=readme-ov-file
+
+
+
+Configure Apache to Allow Access from Your Phone
+Follow these steps to modify Apache settings in XAMPP:
+
+1️⃣ Edit httpd.conf File
+Open XAMPP Control Panel
+
+Click Apache > Config > httpd.conf
+
+Find this line: (CTRL+F FIND)
+
+apache
+
+Listen 80
+Replace it with:
+
+apache
+
+Listen 0.0.0.0:80
+This allows Apache to accept connections from all devices in the network.
+
+Find this section:
+
+apache
+
+<Directory "C:/xampp/htdocs">
+    AllowOverride All
+    Require local
+</Directory>
+Replace Require local with    ----- Require all granted
+
+2️⃣ Edit httpd-vhosts.conf File
+Open XAMPP Control Panel
+Click Apache > Config > httpd-vhosts.conf
+Add this at the end of the file:
+
+Edit
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs"
+    ServerName localhost
+    <Directory "C:/xampp/htdocs">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+3️⃣ Restart Apache
+Go to XAMPP Control Panel
+Click Stop on Apache, then Start again
+
+4️⃣ Test on Phone
+On your phone’s browser, enter:
+cpp
+
+✅ Now your local project should be accessible on your phone! 🚀

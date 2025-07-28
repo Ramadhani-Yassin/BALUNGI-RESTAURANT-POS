@@ -1,0 +1,22 @@
+"C:\Windows\System32\drivers\etc\hosts"
+"C:\xampp\apache\conf\extra\httpd-vhosts.conf"
+
+
+
+vhost ::::::::: "C:\xampp\apache\conf\extra\httpd-vhosts.conf"
+
+<VirtualHost *:80>
+    ServerAdmin ....@gmail.com
+    DocumentRoot "C:\..\..\..\"
+    ServerName balungizanzibar.com
+
+    <Directory "C:\..\..\..\..\..">
+       	Options Indexes FollowSymLinks Includes ExecCGI 
+        AllowOverride All
+        Require all granted
+   </Directory>
+</VirtualHost>
+
+LOCAL IP :::::::::::::::: "C:\Windows\System32\drivers\etc\hosts"
+
+127.0.0.1 local.domain.name.com

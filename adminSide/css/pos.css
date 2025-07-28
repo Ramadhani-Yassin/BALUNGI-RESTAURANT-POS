@@ -1,0 +1,43 @@
+.center-middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+/* Add your other styles here */
+#item-select-section {
+  /* Add any styling specific to the item-select-section */
+  max-width: 40rem; /* You can adjust this value */
+  padding: 1rem; /* Add padding as needed */
+}
+
+#cart-section {
+  /* Add any styling specific to the cart-section */
+  max-width: 60rem; /* You can adjust this value */
+  max-height: 60rem;
+  padding: 1rem; /* Add padding as needed */
+}
+
+.btn-pink {
+  background-color: blue;
+  color: white;
+  border: none;
+}
+.btn-pink:hover,
+.btn-pink:focus {
+  background-color: blue; /* Keeps the color unchanged */
+  color: white;
+}
+
+.btn-orange {
+  background-color: grey;
+  color: white;
+  border: none;
+}
+.btn-orange:hover,
+.btn-orange:focus {
+  background-color: grey; /* Keeps the color unchanged */
+  color: white;
+}
