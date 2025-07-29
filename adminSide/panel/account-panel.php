@@ -6,6 +6,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
     <style>
         .wrapper{ width: 1300px; padding-left: 200px; padding-top: 20px  }
     </style>
+    
 
 <div class="wrapper">
     <div class="container-fluid pt-5 pl-600">
