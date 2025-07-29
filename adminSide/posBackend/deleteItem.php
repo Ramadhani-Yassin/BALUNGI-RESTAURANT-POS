@@ -23,7 +23,7 @@ if (isset($_GET['bill_item_id']) && isset($_GET['bill_id']) && isset($_GET['item
         $delete_query = "DELETE FROM bill_items WHERE bill_item_id = '$bill_item_id'";
         if (mysqli_query($link, $delete_query)) {
             // Delete the corresponding item from the Kitchen table
-            $delete_kitchen_query = "DELETE FROM Kitchen WHERE item_id = '$item_id' AND (table_id = '$table_id' OR table_id IS NULL)";
+            $delete_kitchen_query = "DELETE FROM kitchen WHERE item_id = '$item_id' AND (table_id = '$table_id' OR table_id IS NULL)";
             if (mysqli_query($link, $delete_kitchen_query)) {
                 // If the item is from stock, update the stock quantity based on the unit
                 if ($source === 'stock') {
@@ -64,7 +64,7 @@ if (isset($_GET['bill_item_id']) && isset($_GET['bill_id']) && isset($_GET['item
                                 $new_aggregate_quantity = $aggregate_quantity + $quantity - ($convert_to_base * $conversion_ratio);
                 
                                 // Update both Aggregate and Base units
-                                $update_stock_query = "UPDATE stock SET BaseUnitQuantity = ?, AggregateQuantity = ?, PendingAggregate = ? WHERE ItemID = ?";
+                                $update_stock_query = "UPDATE stock SET BaseUnitQuantity = ?, PendingAggregate = ? WHERE ItemID = ?";
                             }
                 
                             // Prepare the update statement
@@ -73,7 +73,7 @@ if (isset($_GET['bill_item_id']) && isset($_GET['bill_id']) && isset($_GET['item
                             if ($unit === 'base') {
                                 mysqli_stmt_bind_param($stmt_update, "is", $new_base_quantity, $item_id);
                             } elseif ($unit === 'aggregate') {
-                                mysqli_stmt_bind_param($stmt_update, "iiis", $new_base_quantity, $new_aggregate_quantity, $new_pending_aggregate, $item_id);
+                                mysqli_stmt_bind_param($stmt_update, "iis", $new_base_quantity, $new_pending_aggregate, $item_id);
                             }
                 
                             // Execute the update query

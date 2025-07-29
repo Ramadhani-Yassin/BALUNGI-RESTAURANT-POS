@@ -42,19 +42,19 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         $search = $_POST['search'];
 
                         $sql = "SELECT *
-                                FROM Accounts
+                                FROM accounts
                                 WHERE email LIKE '%$search%' OR account_id LIKE '%$search%'
                                 ORDER BY account_id;";
                     } else {
                         // Default query to fetch all accounts
                         $sql = "SELECT *
-                                FROM Accounts
+                                FROM accounts
                                 ORDER BY account_id;";
                     }
                 } else {
                     // Default query to fetch all accounts
                     $sql = "SELECT *
-                            FROM Accounts
+                            FROM accounts
                             ORDER BY account_id;";
                 }
 
@@ -82,7 +82,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             echo "<td>" . $row['password'] . "</td>";
                             //echo "<td>" . ucfirst($row['account_type']) . "</td>"; // Display account type
                           //  echo "<td>";
-                          //  $deleteSQL = "DELETE FROM Accounts WHERE account_id = '" . $row['account_id'] . "';";
+                          //  $deleteSQL = "DELETE FROM accounts WHERE account_id = '" . $row['account_id'] . "';";
                            // echo '<a href="../accountCrud/deleteAccountVerify.php?id=' . $row['account_id'] . '" title="Delete Record" data-toggle="tooltip" '
                            //         . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Account?\n\nThis will alter other modules related to this Account!\n\')"><span class="fa fa-trash text-black"></span></a>';
                            // echo "</td>";

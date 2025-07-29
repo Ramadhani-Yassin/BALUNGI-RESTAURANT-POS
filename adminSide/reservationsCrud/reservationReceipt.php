@@ -6,7 +6,7 @@ $reservation_id = $_GET['reservation_id'] ?? 1;
 
 // Function to fetch reservation information by reservation ID
 function getReservationInfoById($link, $reservation_id) {
-    $query = "SELECT * FROM Reservations WHERE reservation_id='$reservation_id'";
+    $query = "SELECT * FROM reservations WHERE reservation_id='$reservation_id'";
     $result = mysqli_query($link, $query);
 
     if ($result) {
@@ -28,7 +28,7 @@ if ($reservationInfo) {
             $this->SetFont('Arial', 'B', 20);
 
             // Create the logo text
-            $logoText = "BALUNGI RESTAURANT";
+            $logoText = "CAFE MARUU RESTAURANT";
             
             // Add a link-like style (you cannot create actual HTML links in PDF)
             $this->SetTextColor(0, 0, 0); // Set the text color to blue

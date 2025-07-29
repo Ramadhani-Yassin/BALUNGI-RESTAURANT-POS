@@ -8,7 +8,7 @@ vhost ::::::::: "C:\xampp\apache\conf\extra\httpd-vhosts.conf"
 <VirtualHost *:80>
     ServerAdmin ....@gmail.com
     DocumentRoot "C:\..\..\..\"
-    ServerName balungizanzibar.com
+    ServerName cafemaruu.com
 
     <Directory "C:\..\..\..\..\..">
        	Options Indexes FollowSymLinks Includes ExecCGI 

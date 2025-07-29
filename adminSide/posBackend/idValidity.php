@@ -44,7 +44,7 @@ session_start(); // Ensure session is started
         $bill_id = $_GET['bill_id'];
 
         // Check if the staff ID exists in the database
-        $query = "SELECT * FROM Staffs WHERE staff_id = '$staffId'";
+        $query = "SELECT * FROM staffs WHERE staff_id = '$staffId'";
         $result = mysqli_query($link, $query);
 
         if (!$result) {

@@ -1,5 +1,5 @@
 
-# 🍽️ Balungi Restaurant & POS System  
+# 🍽️ Café Maruu Restaurant & POS System  
 
 **A modern Restaurant Management & Point-of-Sale Solution**  
 *Developed by Resilient Matrix Technologies (RM TECH) | Built with PHP, MySQL & XAMPP*
@@ -42,14 +42,14 @@ Automate your restaurant operations with an all-in-one platform featuring:
 ### **Setup in 3 Minutes**  
 1. **Clone & Configure**  
    ```bash
-   git clone https://github.com/Ramadhani-Yassin/BALUNGI-RESTAURANT-POS.git
-   cd Balungi-Restaurant-POS && cp .env.example .env
+   git clone https://github.com/Ramadhani-Yassin/CAFE-MARUU-RESTAURANT-POS.git
+   cd Cafe-Maruu-Restaurant-POS && cp .env.example .env
    ```
 
 2. **Database Setup**  
    ```sql
-   CREATE DATABASE balungi_pos;
-   mysql -u root balungi_pos < database/balungi_pos.sql
+   CREATE DATABASE cafe_maruu_pos;
+   mysql -u root cafe_maruu_pos < database/cafe_maruu_pos.sql
    ```
 
 3. **Launch Application**  
@@ -83,8 +83,8 @@ POST /api/inventory - Updates stock levels
 
 **We value your input!** Here's how to engage:  
 
-- 🐞 **Report Bugs:** [Create Issue](https://github.com/RM-TECH/Balungi-Restaurant-POS/issues)  
-- 💡 **Suggest Features:** [Feature Request](https://github.com/RM-TECH/Balungi-Restaurant-POS/discussions)  
+- 🐞 **Report Bugs:** [Create Issue](https://github.com/RM-TECH/Cafe-Maruu-Restaurant-POS/issues)
+- 💡 **Suggest Features:** [Feature Request](https://github.com/RM-TECH/Cafe-Maruu-Restaurant-POS/discussions)  
 - ✨ **Become a Contributor:**  
   ```bash
   fork && git checkout -b feature/your-idea

@@ -13,7 +13,7 @@ if (!isset($_GET['bill_id'])) {
 $bill_id = mysqli_real_escape_string($link, $_GET['bill_id']);
 
 // Fetch bill details
-$bill_query = "SELECT * FROM Bills WHERE bill_id = '$bill_id'";
+$bill_query = "SELECT * FROM bills WHERE bill_id = '$bill_id'";
 $bill_result = mysqli_query($link, $bill_query);
 $bill_data = mysqli_fetch_assoc($bill_result);
 
@@ -25,7 +25,7 @@ if (!$bill_data) {
 $creditor_name = '';
 if ($bill_data['payment_method'] === 'creditor') {
     $creditor_id = $bill_data['creditor_id'];
-    $creditor_query = "SELECT Name FROM Creditors WHERE ID = '$creditor_id'";
+    $creditor_query = "SELECT Name FROM creditors WHERE ID = '$creditor_id'";
     $creditor_result = mysqli_query($link, $creditor_query);
     if ($creditor_result && mysqli_num_rows($creditor_result) > 0) {
         $creditor_data = mysqli_fetch_assoc($creditor_result);
@@ -42,7 +42,7 @@ $items_query = "
            bi.source, 
            bi.unit
     FROM bill_items bi
-    LEFT JOIN Menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
+    LEFT JOIN menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
     LEFT JOIN stock s ON bi.item_id = s.ItemID AND bi.source = 'stock'
     WHERE bi.bill_id = '$bill_id'
     UNION
@@ -52,10 +52,10 @@ $items_query = "
            poi.quantity, 
            poi.source, 
            poi.unit
-    FROM PendingOrderItems poi
-    LEFT JOIN Menu m ON poi.item_id = m.item_id AND poi.source = 'menu'
+    FROM pendingorderitems poi
+    LEFT JOIN menu m ON poi.item_id = m.item_id AND poi.source = 'menu'
     LEFT JOIN stock s ON poi.item_id = s.ItemID AND poi.source = 'stock'
-    WHERE poi.order_id = (SELECT order_id FROM PendingOrders WHERE bill_id = '$bill_id')
+    WHERE poi.order_id = (SELECT order_id FROM pendingorders WHERE bill_id = '$bill_id')
 ";
 $items_result = mysqli_query($link, $items_query);
 
@@ -77,7 +77,7 @@ if (!empty($bill_data['bill_time'])) {
 
 // Restaurant Header
 $pdf->SetFont('Arial', 'B', 9);
-$pdf->Cell(0, 4, "BALUNGI Restaurant", 0, 1, 'C');
+$pdf->Cell(0, 4, "Cafe Maruu Restaurant", 0, 1, 'C');
 $pdf->SetFont('Arial', '', 7);
 
 // Receipt Info

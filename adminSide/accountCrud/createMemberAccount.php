@@ -67,7 +67,7 @@ if (!empty($register_date)) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-$insert_query = "INSERT INTO Accounts  (email, register_date, phone_number, password, membership_id, staff_id) VALUES (?, ?, ?, ?, ?, ?)";
+$insert_query = "INSERT INTO accounts  (email, register_date, phone_number, password, membership_id, staff_id) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($insert_query);
 $stmt->bind_param("ssssss", $email, $register_date, $phone_number, $password, $membership_id, $staff_id);
 

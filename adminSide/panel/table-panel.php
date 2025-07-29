@@ -38,25 +38,25 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         $search = $_POST['search'];
 
                         $sql = "SELECT *
-                                FROM Restaurant_Tables
+                                FROM restaurant_tables
                                 WHERE table_id LIKE '%$search%' OR capacity LIKE '%$search%' 
                                 ORDER BY table_id;";
                     } else {
                         // Default query to fetch all Restaurant_tables
                         $sql = "SELECT *
-                                FROM Restaurant_Tables
+                                FROM restaurant_tables
                                 ORDER BY table_id;";
                     }
                 } else {
                     // Default query to fetch all Restaurant_tables
                     $sql = "SELECT *
-                            FROM Restaurant_Tables
+                            FROM restaurant_tables
                             ORDER BY table_id;";
                 }
 
 
                     // Attempt select query execution
-                    //$sql = "SELECT * FROM Restaurant_Tables ORDER BY table_id;";
+                    //$sql = "SELECT * FROM restaurant_tables ORDER BY table_id;";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
@@ -80,7 +80,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
                                         }
                                       
                                      //   echo "<td>";
-                                      //  $deleteSQL = "DELETE FROM Reservations WHERE reservation_id = '" . $row['table_id'] . "';";
+                                      //  $deleteSQL = "DELETE FROM reservations WHERE reservation_id = '" . $row['table_id'] . "';";
                                         //   echo '<a href="../tableCrud/deleteTableVerify.php?id='. $row['table_id'] .'" title="Delete Record" data-toggle="tooltip" '
                                          //           . 'onclick="return confirm(\'Admin Permissions Required!\n\nAre you sure you want to delete this Table?\n\nThis will alter other modules related to this Table!\')"><span class="fa fa-trash text-black"></span></a>';
                                        // echo "</td>";

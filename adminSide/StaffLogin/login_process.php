@@ -1,9 +1,13 @@
 <?php
 session_start(); // Ensure session is started
-?>
-<?php
 require_once "../config.php";
 
+// Initialize variables
+$message = "";
+$iconClass = "";
+$cardClass = "";
+$bgColor = "";
+$direction = "login.php";
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -12,44 +16,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $provided_password = $_POST['password'];
 
     // Query to fetch staff record based on provided account_id
-    $query = "SELECT * FROM Accounts WHERE account_id = '$provided_account_id'";
+    $query = "SELECT * FROM accounts WHERE account_id = '$provided_account_id'";
     $result = $link->query($query);
 
-    if ($result->num_rows === 1) {
+    if ($result && $result->num_rows === 1) {
         $row = $result->fetch_assoc();
         $stored_password = $row['password'];
 
         if ($provided_password === $stored_password) {
-        // Password matches, login successful
+            // Password matches, login successful
 
-        // Check if the account_id exists in the Staffs table
-        $staff_query = "SELECT * FROM Staffs WHERE account_id = '$provided_account_id'";
-        $staff_result = $link->query($staff_query);
+            // Check if the account_id exists in the staffs table
+            $staff_query = "SELECT * FROM staffs WHERE account_id = '$provided_account_id'";
+            $staff_result = $link->query($staff_query);
 
-        if ($staff_result->num_rows === 1) {
-            $staff_row = $staff_result->fetch_assoc();
-            $logged_staff_name = $staff_row['staff_name']; // Get staff_name
-            //$message = "Login successful.<br> Welcome to Johnny's Staff Panel.";
-            //$iconClass = "fa-check-circle";
-            //$cardClass = "alert-success";
-            //$bgColor = "#D4F4DD";
-            //$direction = "../panel/pos-panel.php"; // Success, go to staff panel
-            
-            // After successful login, store staff_name in session
-            $_SESSION['logged_account_id'] = $provided_account_id;
-            $_SESSION['logged_staff_name'] = $logged_staff_name;
-            
-            //Directly go to the pos panel upon successful login
-            header("Location: ../posBackend/orderItem.php");
-            exit;
-            
-        } else {
-            // Staff ID not found in Staffs table
-            $message = "Staff ID not found.<br>Please try again to choose a correct Staff ID.";
-            $iconClass = "fa-times-circle";
-            $cardClass = "alert-danger";
-            $bgColor = "#FFA7A7"; // Custom background color for error
-            $direction = "login.php"; // Fail, go back to login
+            if ($staff_result && $staff_result->num_rows === 1) {
+                $staff_row = $staff_result->fetch_assoc();
+                $logged_staff_name = $staff_row['staff_name']; // Get staff_name
+                
+                // After successful login, store staff_name in session
+                $_SESSION['logged_account_id'] = $provided_account_id;
+                $_SESSION['logged_staff_name'] = $logged_staff_name;
+                
+                //Directly go to the pos panel upon successful login
+                header("Location: ../posBackend/orderItem.php");
+                exit;
+                
+            } else {
+                // Staff ID not found in staffs table
+                $message = "Staff ID not found.<br>Please try again to choose a correct Staff ID.";
+                $iconClass = "fa-times-circle";
+                $cardClass = "alert-danger";
+                $bgColor = "#FFA7A7"; // Custom background color for error
+                $direction = "login.php"; // Fail, go back to login
             }      
             
         } else {
@@ -130,7 +129,7 @@ $link->close();
             font-size: 100px;
             line-height: 200px;
         }
-            .alert-box {
+        .alert-box {
             max-width: 300px;
             margin: 0 auto;
         }
@@ -142,7 +141,8 @@ $link->close();
     </style>
 </head>
 <body>
-    <div class="card <?php echo $cardClass; ?>" style="display: none;">
+    <?php if (!empty($message)): ?>
+    <div class="card <?php echo $cardClass; ?>">
         <div style="border-radius: 200px; height: 200px; width: 200px; background: #F8FAF5; margin: 0 auto;">
             <?php if ($iconClass === 'fa-check-circle'): ?>
                 <i class="checkmark">✓</i>
@@ -193,5 +193,6 @@ $link->close();
         // Hide the message card after 3 seconds (adjust the delay as needed)
         setTimeout(hidePopup, 3000);
     </script>
+    <?php endif; ?>
 </body>
 </html>

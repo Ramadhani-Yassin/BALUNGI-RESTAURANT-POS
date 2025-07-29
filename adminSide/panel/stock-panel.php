@@ -46,9 +46,9 @@ require_once '../posBackend/checkIfLoggedIn.php';
 
                 if (isset($_POST['search']) && !empty($_POST['search'])) {
                     $search = $_POST['search'];
-                    $sql = "SELECT * FROM Stock WHERE ItemName LIKE '%$search%' OR ItemID LIKE '%$search%' ORDER BY ItemID";
+                    $sql = "SELECT * FROM stock WHERE ItemName LIKE '%$search%' OR ItemID LIKE '%$search%' ORDER BY ItemID";
                 } else {
-                    $sql = "SELECT * FROM Stock ORDER BY ItemID";
+                    $sql = "SELECT * FROM stock ORDER BY ItemID";
                 }
 
                 if ($result = mysqli_query($link, $sql)) {

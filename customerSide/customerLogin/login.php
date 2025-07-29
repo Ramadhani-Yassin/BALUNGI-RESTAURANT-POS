@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check input errors before checking authentication
     if (empty($email_err) && empty($password_err)) {
         // Prepare a select statement
-        $sql = "SELECT * FROM Accounts WHERE email = ?";
+        $sql = "SELECT * FROM accounts WHERE email = ?";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION["email"] = $email;
 
                         // Query to get membership details
-                        $sql_member = "SELECT * FROM Memberships WHERE account_id = " . $row['account_id'];
+                        $sql_member = "SELECT * FROM memberships WHERE account_id = " . $row['account_id'];
                         $result_member = mysqli_query($link, $sql_member);
 
                         if ($result_member) {
@@ -159,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="login-container">
     <div class="login_wrapper">
-        <a class="nav-link" href="../home/home.php#hero"> <h1 class="text-center" style="font-family:Copperplate; color:white;"> BALUNGI</h1><span class="sr-only"></span></a>
+        <a class="nav-link" href="../home/home.php#hero"> <h1 class="text-center" style="font-family:Copperplate; color:white;"> CAFÉ MARUU</h1><span class="sr-only"></span></a>
     
         <div class="wrapper">
            

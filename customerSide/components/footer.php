@@ -24,7 +24,7 @@
           
         
       </div>
-      <p>© <?= date('Y') ?> Balungi Dining & Bar</p>
+      <p>© <?= date('Y') ?> Café Maruu Dining & Bar</p>
       
       
     </div>

@@ -5,7 +5,7 @@ $search = isset($_POST['search']) ? $_POST['search'] : '';
 $bill_id = isset($_POST['bill_id']) ? $_POST['bill_id'] : '';
 
 if (!empty($search)) {
-    $query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL AS unit FROM Menu 
+    $query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL AS unit FROM menu 
               WHERE item_type LIKE '%$search%' 
               OR item_category LIKE '%$search%' 
               OR item_name LIKE '%$search%' 
@@ -28,7 +28,7 @@ if (!empty($search)) {
             echo "<td>" . number_format($row['item_price'], 2) . "</td>";
 
             // Check if the bill has been paid
-            $payment_time_query = "SELECT payment_time FROM Bills WHERE bill_id = '$bill_id'";
+            $payment_time_query = "SELECT payment_time FROM bills WHERE bill_id = '$bill_id'";
             $payment_time_result = mysqli_query($link, $payment_time_query);
             $has_payment_time = false;
 

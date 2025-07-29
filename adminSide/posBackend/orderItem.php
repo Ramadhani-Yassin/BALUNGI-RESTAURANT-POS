@@ -22,7 +22,7 @@ function createNewBillRecord($table_id) {
     
     $bill_time = date('Y-m-d H:i:s');
     
-    $insert_query = "INSERT INTO Bills (table_id, bill_time) VALUES (" . ($table_id !== null ? "'$table_id'" : "NULL") . ", '$bill_time')";
+    $insert_query = "INSERT INTO bills (table_id, bill_time) VALUES (" . ($table_id !== null ? "'$table_id'" : "NULL") . ", '$bill_time')";
 
     if ($link->query($insert_query) === TRUE) {
         return $link->insert_id; // Return the newly inserted bill_id
@@ -154,7 +154,7 @@ function createNewBillRecord($table_id) {
 
                             if ($show_all === "true") {
                                 // Show all menu and stock items when "Show All" is clicked
-                                $query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL AS unit FROM Menu 
+                                $query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL AS unit FROM menu 
                                           UNION 
                                           SELECT ItemID AS item_id, CONCAT(ItemName, ' (', BaseUnitName, ')') AS item_name, PricePerBaseUnit AS item_price, 'stock' AS source, 'base' AS unit FROM stock 
                                           UNION 
@@ -165,7 +165,7 @@ function createNewBillRecord($table_id) {
                                 // Perform search when a keyword is typed
                                 $search = $_POST['search'];
 
-                                $query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL AS unit FROM Menu 
+                                $query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL AS unit FROM menu 
                                           WHERE item_type LIKE '%$search%' 
                                           OR item_category LIKE '%$search%' 
                                           OR item_name LIKE '%$search%' 
@@ -189,7 +189,7 @@ function createNewBillRecord($table_id) {
                                         echo "<td>" . number_format($row['item_price'], 2) . "</td>";
 
                                         // Check if the bill has been paid
-                                        $payment_time_query = "SELECT payment_time FROM Bills WHERE bill_id = '$bill_id'";
+                                        $payment_time_query = "SELECT payment_time FROM bills WHERE bill_id = '$bill_id'";
                                         $payment_time_result = mysqli_query($link, $payment_time_query);
                                         $has_payment_time = false;
 
@@ -254,7 +254,7 @@ function createNewBillRecord($table_id) {
                                                   COALESCE(m.item_price, 
                                                            CASE WHEN bi.unit = 'base' THEN s.PricePerBaseUnit ELSE s.PricePerSubUnit END) AS item_price
                                            FROM bill_items bi
-                                           LEFT JOIN Menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
+                                           LEFT JOIN menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
                                            LEFT JOIN stock s ON bi.item_id = s.ItemID AND bi.source = 'stock'
                                            WHERE bi.bill_id = '$bill_id'";
                             $cart_result = mysqli_query($link, $cart_query);
@@ -276,7 +276,7 @@ function createNewBillRecord($table_id) {
                                     echo '<td>' . number_format($total, 2) . '</td>';
 
                                     // Check if the bill has been paid
-                                    $payment_time_query = "SELECT payment_time FROM Bills WHERE bill_id = '$bill_id'";
+                                    $payment_time_query = "SELECT payment_time FROM bills WHERE bill_id = '$bill_id'";
                                     $payment_time_result = mysqli_query($link, $payment_time_query);
                                     $has_payment_time = false;
 
@@ -319,7 +319,7 @@ function createNewBillRecord($table_id) {
 
                 <?php
                 // Check if the payment time record exists for the bill
-                $payment_time_query = "SELECT payment_time FROM Bills WHERE bill_id = '$bill_id'";
+                $payment_time_query = "SELECT payment_time FROM bills WHERE bill_id = '$bill_id'";
                 $payment_time_result = mysqli_query($link, $payment_time_query);
                 $has_payment_time = false;
 

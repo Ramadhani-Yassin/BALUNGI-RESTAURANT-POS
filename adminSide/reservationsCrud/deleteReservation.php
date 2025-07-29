@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
                 mysqli_stmt_bind_param($stmt, "i", $reservation_id);
                 if (mysqli_stmt_execute($stmt)) {
                     // Bills deleted successfully, now delete the reservation
-                    $deleteReservationSQL = "DELETE FROM Reservations WHERE reservation_id = ?";
+                    $deleteReservationSQL = "DELETE FROM reservations WHERE reservation_id = ?";
                     if ($stmt = mysqli_prepare($link, $deleteReservationSQL)) {
                         mysqli_stmt_bind_param($stmt, "i", $reservation_id);
                         if (mysqli_stmt_execute($stmt)) {

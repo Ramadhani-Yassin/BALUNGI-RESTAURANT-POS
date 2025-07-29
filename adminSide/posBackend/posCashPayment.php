@@ -48,7 +48,7 @@ $reservation_id = $_GET['reservation_id'];
                                            bi.source, 
                                            bi.unit
                                     FROM bill_items bi
-                                    LEFT JOIN Menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
+                                    LEFT JOIN menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
                                     LEFT JOIN stock s ON bi.item_id = s.ItemID AND bi.source = 'stock'
                                     WHERE bi.bill_id = '$bill_id'
                                     UNION
@@ -58,10 +58,10 @@ $reservation_id = $_GET['reservation_id'];
                                            poi.quantity, 
                                            poi.source, 
                                            poi.unit
-                                    FROM PendingOrderItems poi
-                                    LEFT JOIN Menu m ON poi.item_id = m.item_id AND poi.source = 'menu'
+                                    FROM pendingorderitems poi
+                                    LEFT JOIN menu m ON poi.item_id = m.item_id AND poi.source = 'menu'
                                     LEFT JOIN stock s ON poi.item_id = s.ItemID AND poi.source = 'stock'
-                                    WHERE poi.order_id = (SELECT order_id FROM PendingOrders WHERE bill_id = '$bill_id')
+                                    WHERE poi.order_id = (SELECT order_id FROM pendingorders WHERE bill_id = '$bill_id')
                                 ";
                                 $cart_result = mysqli_query($link, $cart_query);
                                 $cart_total = 0; // Cart total
@@ -122,7 +122,7 @@ $reservation_id = $_GET['reservation_id'];
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pay'])) {
                 // Check if the bill has already been paid
-                $billCheckQuery = "SELECT payment_time FROM Bills WHERE bill_id = $bill_id";
+                $billCheckQuery = "SELECT payment_time FROM bills WHERE bill_id = $bill_id";
                 $billCheckResult = $link->query($billCheckQuery);
 
                 if ($billCheckResult) {
@@ -139,7 +139,7 @@ $reservation_id = $_GET['reservation_id'];
 
                 // Update the payment method, bill time, and other details
                 $currentTime = date('Y-m-d H:i:s');
-                $updateQuery = "UPDATE Bills SET payment_method = 'cash', payment_time = '$currentTime',
+                $updateQuery = "UPDATE bills SET payment_method = 'cash', payment_time = '$currentTime',
                                 staff_id = $staff_id, member_id = $member_id, reservation_id = $reservation_id
                                 WHERE bill_id = $bill_id;";
 
@@ -156,7 +156,7 @@ $reservation_id = $_GET['reservation_id'];
                     $stmt->execute();
 
                     if (!empty($member_id)) {
-                        $update_points_sql = "UPDATE Memberships SET points = points + $points WHERE member_id = $member_id;";
+                        $update_points_sql = "UPDATE memberships SET points = points + $points WHERE member_id = $member_id;";
                         $link->query($update_points_sql);
                     }
 

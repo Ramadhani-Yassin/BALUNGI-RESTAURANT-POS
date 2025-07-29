@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
     mysqli_query($link, $disableForeignKeySQL);
 
     // Construct the DELETE query
-    $deleteSQL = "DELETE FROM Menu WHERE item_id = '" . $_GET['id'] . "';";
+    $deleteSQL = "DELETE FROM menu WHERE item_id = '" . $_GET['id'] . "';";
 
     // Execute the DELETE query
     if (mysqli_query($link, $deleteSQL)) {

@@ -14,7 +14,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $item_id = $_GET['id'];
 
     // Retrieve item details based on item_id
-    $sql = "SELECT * FROM Menu WHERE item_id = ?";
+    $sql = "SELECT * FROM menu WHERE item_id = ?";
     
     if ($stmt = mysqli_prepare($link, $sql)) {
         mysqli_stmt_bind_param($stmt, "s", $param_item_id);
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $item_description = $_POST["item_description"];
 
     // Update the item in the database
-    $update_sql = "UPDATE Menu SET item_name='$item_name', item_type='$item_type', item_category='$item_category', item_price='$item_price', item_description='$item_description' WHERE item_id='$item_id'";
+    $update_sql = "UPDATE menu SET item_name='$item_name', item_type='$item_type', item_category='$item_category', item_price='$item_price', item_description='$item_description' WHERE item_id='$item_id'";
     $resultItems = mysqli_query($link, $update_sql);
     
         if ($resultItems) {

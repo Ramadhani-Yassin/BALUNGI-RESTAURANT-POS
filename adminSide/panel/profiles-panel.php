@@ -42,7 +42,7 @@ require_once '../config.php';
                 <?php
                 if (isset($_GET['search_term']) && !empty($_GET['search_term'])) {
                     $searchTerm = trim($_GET['search_term']);
-                    $query = "SELECT Name, Due_Amount, Date, Telephone FROM Creditors WHERE ID = ? OR Name LIKE ?";
+                    $query = "SELECT Name, Due_Amount, Date, Telephone FROM creditors WHERE ID = ? OR Name LIKE ?";
                     
                     if ($stmt = mysqli_prepare($link, $query)) {
                         $searchLike = "%" . $searchTerm . "%";
@@ -90,7 +90,7 @@ require_once '../config.php';
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     <?php
-    $creditorsQuery = "SELECT Name, Due_Amount FROM Creditors ORDER BY Due_Amount DESC LIMIT 5";
+    $creditorsQuery = "SELECT Name, Due_Amount FROM creditors ORDER BY Due_Amount DESC LIMIT 5";
     $creditorsResult = mysqli_query($link, $creditorsQuery);
 
     $creditorLabels = [];

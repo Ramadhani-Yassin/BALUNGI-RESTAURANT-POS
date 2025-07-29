@@ -20,7 +20,7 @@ $input_password = $password_err = $password = "";
 </head>
 
 <div class="wrapper">
-    <h1>BALUNGI Dining & Bar</h1>
+    <h1>Café Maruu Dining & Bar</h1>
     <h3>Create New Account</h3>
     <p>Please fill in Account Information Properly</p>
 

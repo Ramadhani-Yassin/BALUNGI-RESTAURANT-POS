@@ -9,30 +9,30 @@ require_once '../config.php';
 $currentDate = date('Y-m-d');
 
 // Calculate total revenue for today
-$totalRevenueTodayQuery = "SELECT SUM(item_price * quantity) AS total_revenue FROM Bill_Items
-                           INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id
-                           INNER JOIN Bills ON Bill_Items.bill_id = Bills.bill_id
-                           WHERE DATE(Bills.bill_time) = '$currentDate'";
+$totalRevenueTodayQuery = "SELECT SUM(item_price * quantity) AS total_revenue FROM bill_items
+                           INNER JOIN menu ON Bill_Items.item_id = Menu.item_id
+                           INNER JOIN bills ON Bill_Items.bill_id = Bills.bill_id
+                           WHERE DATE(bills.bill_time) = '$currentDate'";
 $totalRevenueTodayResult = mysqli_query($link, $totalRevenueTodayQuery);
 $totalRevenueTodayRow = mysqli_fetch_assoc($totalRevenueTodayResult);
 $totalRevenueToday = $totalRevenueTodayRow['total_revenue'];
 
 // Calculate total revenue for this week (assuming week starts on Monday)
 $currentWeekStart = date('Y-m-d', strtotime('monday this week'));
-$totalRevenueThisWeekQuery = "SELECT SUM(item_price * quantity) AS total_revenue FROM Bill_Items
-                             INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id
-                             INNER JOIN Bills ON Bill_Items.bill_id = Bills.bill_id
-                             WHERE DATE(Bills.bill_time) >= '$currentWeekStart'";
+$totalRevenueThisWeekQuery = "SELECT SUM(item_price * quantity) AS total_revenue FROM bill_items
+                             INNER JOIN menu ON Bill_Items.item_id = Menu.item_id
+                             INNER JOIN bills ON Bill_Items.bill_id = Bills.bill_id
+                             WHERE DATE(bills.bill_time) >= '$currentWeekStart'";
 $totalRevenueThisWeekResult = mysqli_query($link, $totalRevenueThisWeekQuery);
 $totalRevenueThisWeekRow = mysqli_fetch_assoc($totalRevenueThisWeekResult);
 $totalRevenueThisWeek = $totalRevenueThisWeekRow['total_revenue'];
 
 // Calculate total revenue for this month
 $currentMonthStart = date('Y-m-01');
-$totalRevenueThisMonthQuery = "SELECT SUM(item_price * quantity) AS total_revenue FROM Bill_Items
-                              INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id
-                              INNER JOIN Bills ON Bill_Items.bill_id = Bills.bill_id
-                              WHERE DATE(Bills.bill_time) >= '$currentMonthStart'";
+$totalRevenueThisMonthQuery = "SELECT SUM(item_price * quantity) AS total_revenue FROM bill_items
+                              INNER JOIN menu ON Bill_Items.item_id = Menu.item_id
+                              INNER JOIN bills ON Bill_Items.bill_id = Bills.bill_id
+                              WHERE DATE(bills.bill_time) >= '$currentMonthStart'";
 $totalRevenueThisMonthResult = mysqli_query($link, $totalRevenueThisMonthQuery);
 $totalRevenueThisMonthRow = mysqli_fetch_assoc($totalRevenueThisMonthResult);
 $totalRevenueThisMonth = $totalRevenueThisMonthRow['total_revenue'];
@@ -50,8 +50,8 @@ $totalRevenueThisMonth = $totalRevenueThisMonthRow['total_revenue'];
                 require_once '../config.php';
 
                 // Calculate total revenue
-                $totalRevenueQuery = "SELECT SUM(item_price * quantity) AS total_revenue FROM Bill_Items
-                                     INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id";
+                $totalRevenueQuery = "SELECT SUM(item_price * quantity) AS total_revenue FROM bill_items
+                                     INNER JOIN menu ON Bill_Items.item_id = Menu.item_id";
                 $totalRevenueResult = mysqli_query($link, $totalRevenueQuery);
                 $totalRevenueRow = mysqli_fetch_assoc($totalRevenueResult);
                 $totalRevenue = $totalRevenueRow['total_revenue'];
@@ -114,11 +114,11 @@ $cardQuery = "
     SELECT
         IFNULL(SUM(bi.quantity * m.item_price), 0) AS card_revenue
     FROM
-        Bills b
+        bills b
     LEFT JOIN
-        Bill_Items bi ON b.bill_id = bi.bill_id
+        bill_items bi ON b.bill_id = bi.bill_id
     LEFT JOIN
-        Menu m ON bi.item_id = m.item_id
+        menu m ON bi.item_id = m.item_id
     WHERE
         b.payment_method LIKE 'Card'
         AND b.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59';
@@ -129,11 +129,11 @@ $cashQuery = "
     SELECT
         IFNULL(SUM(bi.quantity * m.item_price), 0) AS cash_revenue
     FROM
-        Bills b
+        bills b
     LEFT JOIN
-        Bill_Items bi ON b.bill_id = bi.bill_id
+        bill_items bi ON b.bill_id = bi.bill_id
     LEFT JOIN
-        Menu m ON bi.item_id = m.item_id
+        menu m ON bi.item_id = m.item_id
     WHERE
         b.payment_method LIKE 'Cash'
         AND b.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59';

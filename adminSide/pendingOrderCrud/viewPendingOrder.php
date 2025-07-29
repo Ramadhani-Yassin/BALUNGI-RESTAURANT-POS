@@ -10,17 +10,17 @@ if (!isset($_GET['order_id'])) {
 $order_id = $_GET['order_id'];
 
 // Fetch pending order details
-$order_query = "SELECT * FROM PendingOrders WHERE order_id = '$order_id'";
+$order_query = "SELECT * FROM pendingorders WHERE order_id = '$order_id'";
 $order_result = mysqli_query($link, $order_query);
 $order = mysqli_fetch_assoc($order_result);
 
 // Fetch items in the pending order
-$items_query = "SELECT * FROM PendingOrderItems WHERE order_id = '$order_id'";
+$items_query = "SELECT * FROM pendingorderitems WHERE order_id = '$order_id'";
 $items_result = mysqli_query($link, $items_query);
 
 // Fetch items from Menu and Stock for the search functionality
 $search_query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL AS unit 
-                 FROM Menu 
+                 FROM menu 
                  UNION 
                  SELECT ItemID AS item_id, CONCAT(ItemName, ' (', BaseUnitName, ')') AS item_name, 
                         PricePerBaseUnit AS item_price, 'stock' AS source, 'base' AS unit 
@@ -35,7 +35,7 @@ $search_query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL A
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
     $search_query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL AS unit 
-                     FROM Menu 
+                     FROM menu 
                      WHERE item_name LIKE '%$search%' 
                      OR item_id LIKE '%$search%' 
                      UNION 
@@ -55,7 +55,7 @@ $show_all = isset($_GET['show_all']) ? $_GET['show_all'] : "false";
 if ($show_all === "true") {
     // Show all items
     $search_query = "SELECT item_id, item_name, item_price, 'menu' AS source, NULL AS unit 
-                     FROM Menu 
+                     FROM menu 
                      UNION 
                      SELECT ItemID AS item_id, CONCAT(ItemName, ' (', BaseUnitName, ')') AS item_name, 
                             PricePerBaseUnit AS item_price, 'stock' AS source, 'base' AS unit 
@@ -71,7 +71,7 @@ $search_result = mysqli_query($link, $search_query);
 
 // Check if the bill has been paid
 $bill_id = $order['bill_id'];
-$payment_time_query = "SELECT payment_time FROM Bills WHERE bill_id = '$bill_id'";
+$payment_time_query = "SELECT payment_time FROM bills WHERE bill_id = '$bill_id'";
 $payment_time_result = mysqli_query($link, $payment_time_query);
 $has_payment_time = false;
 
@@ -85,7 +85,7 @@ if ($payment_time_result && mysqli_num_rows($payment_time_result) > 0) {
 // Handle "Pay Bill" action
 if (isset($_POST['pay_bill'])) {
     // Fetch all items in the pending order
-    $items_query = "SELECT * FROM PendingOrderItems WHERE order_id = '$order_id'";
+    $items_query = "SELECT * FROM pendingorderitems WHERE order_id = '$order_id'";
     $items_result = mysqli_query($link, $items_query);
 
     if ($items_result && mysqli_num_rows($items_result) > 0) {
@@ -104,7 +104,7 @@ if (isset($_POST['pay_bill'])) {
         }
 
         // Mark the pending order as completed
-        $update_query = "UPDATE PendingOrders SET status = 'Completed' WHERE order_id = '$order_id'";
+        $update_query = "UPDATE pendingorders SET status = 'Completed' WHERE order_id = '$order_id'";
         mysqli_query($link, $update_query);
 
         // Redirect to the payment page
@@ -236,7 +236,7 @@ if (isset($_POST['pay_bill'])) {
                                                 <input type='hidden' name='order_id' value='$order_id'>
                                                 <input type='hidden' name='item_id' value='{$row['item_id']}'>
                                                 <input type='hidden' name='source' value='{$row['source']}'>
-                                                <input type='hidden' name='unit' value='{$row['unit']}'>
+                                                <input type='hidden' name='unit' value='" . ($row['unit'] ?? 'base') . "'>
                                                 <input type='number' name='quantity' placeholder='1 to 1000' required min='1' max='1000' style='width: 100px;'>
                                                 <button type='submit' class='btn btn-primary'>Add</button>
                                               </form>";

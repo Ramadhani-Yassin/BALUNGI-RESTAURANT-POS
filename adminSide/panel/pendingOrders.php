@@ -8,19 +8,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && isset($_GE
     $order_id = $_GET['order_id'];
     if ($_GET['action'] === 'close') {
         // Close the pending order and create a bill
-        $customer_name_query = "SELECT customer_name FROM PendingOrders WHERE order_id = '$order_id'";
+        $customer_name_query = "SELECT customer_name FROM pendingorders WHERE order_id = '$order_id'";
         $customer_name_result = mysqli_query($link, $customer_name_query);
         $customer_name_row = mysqli_fetch_assoc($customer_name_result);
         $customer_name = $customer_name_row['customer_name'];
 
         // Create a new bill
         $bill_time = date('Y-m-d H:i:s');
-        $insert_bill_query = "INSERT INTO Bills (customer_name, bill_time) VALUES ('$customer_name', '$bill_time')";
+        $insert_bill_query = "INSERT INTO bills (customer_name, bill_time) VALUES ('$customer_name', '$bill_time')";
         if (mysqli_query($link, $insert_bill_query)) {
             $bill_id = mysqli_insert_id($link);
 
             // Fetch items from the pending order
-            $items_query = "SELECT * FROM PendingOrderItems WHERE order_id = '$order_id'";
+            $items_query = "SELECT * FROM pendingorderitems WHERE order_id = '$order_id'";
             $items_result = mysqli_query($link, $items_query);
 
             if ($items_result && mysqli_num_rows($items_result) > 0) {
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && isset($_GE
             }
 
             // Update the pending order status to 'Closed' and set the bill_id
-            $update_query = "UPDATE PendingOrders SET status = 'Closed', bill_id = '$bill_id' WHERE order_id = '$order_id'";
+            $update_query = "UPDATE pendingorders SET status = 'Closed', bill_id = '$bill_id' WHERE order_id = '$order_id'";
             if (mysqli_query($link, $update_query)) {
                 // Redirect to the cart page with the new bill_id
                 header("Location: ../posBackend/orderItem.php?bill_id=$bill_id");
@@ -46,9 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && isset($_GE
         }
     } elseif ($_GET['action'] === 'delete') {
         // Delete the pending order and associated items
-        $delete_order_items_query = "DELETE FROM PendingOrderItems WHERE order_id = '$order_id'";
+        $delete_order_items_query = "DELETE FROM pendingorderitems WHERE order_id = '$order_id'";
         if (mysqli_query($link, $delete_order_items_query)) {
-            $delete_order_query = "DELETE FROM PendingOrders WHERE order_id = '$order_id'";
+            $delete_order_query = "DELETE FROM pendingorders WHERE order_id = '$order_id'";
             if (mysqli_query($link, $delete_order_query)) {
                 // No confirmation message here, just delete
             } else {
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && isset($_GE
 }
 
 // Fetch all pending orders
-$query = "SELECT * FROM PendingOrders ORDER BY order_id DESC";
+$query = "SELECT * FROM pendingorders ORDER BY order_id DESC";
 $result = mysqli_query($link, $query);
 ?>
 

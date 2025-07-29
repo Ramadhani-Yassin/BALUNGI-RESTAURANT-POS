@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['addToCart'])) {
     $item_category = '';
     
     if ($source === 'menu') {
-        $item_query = "SELECT item_name, item_price, item_category FROM Menu WHERE item_id = '$item_id'";
+        $item_query = "SELECT item_name, item_price, item_category FROM menu WHERE item_id = '$item_id'";
         $item_result = mysqli_query($link, $item_query);
         
         if (!$item_result || mysqli_num_rows($item_result) === 0) {
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['addToCart'])) {
                 if ($unit === 'base') {
                     if ($quantity > $base_quantity) {
                         echo "<script>
-                        alert('Not enough Items available on Balungi Stock ⚠️‼️.');
+                        alert('Not enough Items available on Café Maruu Stock ⚠️‼️.');
                         window.location.href = 'orderItem.php'; // Redirect to cart page instead of going back
                       </script>";
                         exit();
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['addToCart'])) {
                 elseif ($unit === 'aggregate') {
                     if ($quantity > $aggregate_quantity) {
                         echo "<script>
-                        alert('Not enough Items available on Balungi Stock ⚠️‼️.');
+                        alert('Not enough Items available on Café Maruu Stock ⚠️‼️.');
                         window.location.href = 'orderItem.php'; // Redirect to cart page instead of going back
                       </script>";
                         exit();
@@ -114,10 +114,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['addToCart'])) {
                     throw new Exception("Invalid unit type.");
                 }
 
-                // Update stock with prepared statement
-                $update_stock_query = "UPDATE stock SET BaseUnitQuantity = ?, AggregateQuantity = ?, PendingAggregate = ? WHERE ItemID = ?";
+                // Update stock with prepared statement (AggregateQuantity is auto-calculated)
+                $update_stock_query = "UPDATE stock SET BaseUnitQuantity = ?, PendingAggregate = ? WHERE ItemID = ?";
                 $update_stmt = mysqli_prepare($link, $update_stock_query);
-                mysqli_stmt_bind_param($update_stmt, "iiis", $new_base_quantity, $new_aggregate_quantity, $new_pending_aggregate, $item_id);
+                mysqli_stmt_bind_param($update_stmt, "iis", $new_base_quantity, $new_pending_aggregate, $item_id);
                 mysqli_stmt_execute($update_stmt);
                 
                 if (mysqli_stmt_affected_rows($update_stmt) === 0) {
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['addToCart'])) {
         // For menu items in 'Main Dishes' category
         if ($source === 'menu' && isset($item_category) && strtolower($item_category) === 'main dishes') {
             $currentTime = date('Y-m-d H:i:s');
-            $insert_kitchen_query = "INSERT INTO Kitchen (table_id, item_id, quantity, time_submitted) 
+            $insert_kitchen_query = "INSERT INTO kitchen (table_id, item_id, quantity, time_submitted) 
                                    VALUES (". ($table_id !== null ? "'$table_id'" : "NULL") .", '$item_id', '$quantity', '$currentTime')";
             if (!mysqli_query($link, $insert_kitchen_query)) {
                 error_log("Error inserting into Kitchen: " . mysqli_error($link));

@@ -15,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reservation_id = $customer_name . "_" . $reservation_date . "_" . $head_count;
 
     // Prepare the SQL query for insertion
-    $insert_query1 = "INSERT INTO Reservations (reservation_id, customer_name, table_id, reservation_time, reservation_date, head_count, special_request) 
+    $insert_query1 = "INSERT INTO reservations (reservation_id, customer_name, table_id, reservation_time, reservation_date, head_count, special_request) 
                     VALUES ('$reservation_id', '$customer_name', '$table_id', '$reservation_time', '$reservation_date', '$head_count', '$special_request');"; // Change "Menu" to "Reservations"
-    $insert_query2 = "INSERT INTO Table_Availability (availability_id, table_id, reservation_date, reservation_time, status) 
+    $insert_query2 = "INSERT INTO table_availability (availability_id, table_id, reservation_date, reservation_time, status) 
                     VALUES ('$reservation_id', '$table_id', '$reservation_date', '$reservation_time',  'no');";
     mysqli_query($link, $insert_query1);
     mysqli_query($link, $insert_query2);

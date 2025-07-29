@@ -199,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['custom_range'])) {
         <div class="col-md-12">
             <div class="card report-card mb-4">
                 <div class="card-header">
-                    <h3 class="card-title">Balungi Sales Reports</h3>
+                    <h3 class="card-title">Café Maruu Sales Reports</h3>
                 </div>
                 <div class="card-body">
                     <!-- Period Selector -->

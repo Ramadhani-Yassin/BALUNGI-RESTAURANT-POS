@@ -13,7 +13,7 @@ if (isset($_GET['order_id']) && isset($_GET['item_id'])) {
     }
 
     // Delete the item from PendingOrderItems
-    $delete_query = "DELETE FROM PendingOrderItems WHERE order_id = '$order_id' AND item_id = '$item_id'";
+    $delete_query = "DELETE FROM pendingorderitems WHERE order_id = '$order_id' AND item_id = '$item_id'";
 
     if (mysqli_query($link, $delete_query)) {
         // Redirect back to the pending order view page

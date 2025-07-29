@@ -13,14 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     
     // Prepare the SQL query to check if the account_id already exists
-    $check_account_query = "SELECT account_id FROM Accounts WHERE account_id = ?";
+    $check_account_query = "SELECT account_id FROM accounts WHERE account_id = ?";
     $check_account_stmt = $conn->prepare($check_account_query);
     $check_account_stmt->bind_param("i", $account_id);
     $check_account_stmt->execute();
     $check_account_result = $check_account_stmt->get_result();
     
     // Prepare the SQL query to check if the email already exists
-    $check_email_query = "SELECT email FROM Accounts WHERE email = ?";
+    $check_email_query = "SELECT email FROM accounts WHERE email = ?";
     $check_email_stmt = $conn->prepare($check_email_query);
     $check_email_stmt->bind_param("s", $email);
     $check_email_stmt->execute();
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bgColor = "#FFA7A7"; // Custom background color for error   
     } else {
         // Prepare the SQL query for insertion
-        $insert_query = "INSERT INTO Accounts (account_id, email, register_date, phone_number, password) VALUES (?, ?, ?, ?, ?)";
+        $insert_query = "INSERT INTO accounts (account_id, email, register_date, phone_number, password) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insert_query);
 
         // Bind the parameters

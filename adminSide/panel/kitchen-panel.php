@@ -5,7 +5,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
 <?php
 include '../inc/dashHeader.php';
 require_once '../config.php';
-$query = "SELECT * FROM Kitchen WHERE time_ended IS NULL";
+$query = "SELECT * FROM kitchen WHERE time_ended IS NULL";
 $result = mysqli_query($link, $query);
 ?>
 
@@ -46,7 +46,7 @@ $result = mysqli_query($link, $query);
                         $time_ended = $row['time_ended'];
 
                         // Get item name from Menu table
-                        $itemQuery = "SELECT item_name FROM Menu WHERE item_id = '$item_id'";
+                        $itemQuery = "SELECT item_name FROM menu WHERE item_id = '$item_id'";
                         $itemResult = mysqli_query($link, $itemQuery);
                         $itemRow = mysqli_fetch_assoc($itemResult);
                         $item_name = $itemRow['item_name']??"Deleted";

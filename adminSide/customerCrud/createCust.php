@@ -18,7 +18,7 @@ $input_password = $password_err = $password = "";
 
 // Function to get the next available account ID
 function getNextAvailableAccountID($conn) {
-    $sql = "SELECT MAX(account_id) as max_account_id FROM Accounts";
+    $sql = "SELECT MAX(account_id) as max_account_id FROM accounts";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $next_account_id = $row['max_account_id'] + 1;
@@ -27,7 +27,7 @@ function getNextAvailableAccountID($conn) {
 
 // Function to get the next available Member ID
 function getNextAvailableMemberID($conn) {
-    $sql = "SELECT MAX(member_id) as max_member_id FROM Memberships";
+    $sql = "SELECT MAX(member_id) as max_member_id FROM memberships";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $next_member_id = $row['max_member_id'] + 1;

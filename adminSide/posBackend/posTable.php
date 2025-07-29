@@ -23,7 +23,7 @@ require_once '../config.php'; // Include your database configuration
                 <div class="row justify-content-center">
                     <?php
                     // Fetch all tables from the database
-                    $query = "SELECT * FROM Restaurant_Tables ORDER BY table_id;";
+                    $query = "SELECT * FROM restaurant_tables ORDER BY table_id;";
                     $result = mysqli_query($link, $query);
                     $table = array("", "", "");
                     if ($result) {
@@ -37,7 +37,7 @@ require_once '../config.php'; // Include your database configuration
                         $capacity = $row['capacity'];
                         
 
-                        $sqlBill = "SELECT bill_id FROM Bills WHERE table_id = $table_id ORDER BY bill_time DESC LIMIT 1";
+                        $sqlBill = "SELECT bill_id FROM bills WHERE table_id = $table_id ORDER BY bill_time DESC LIMIT 1";
                         $result1 = $link->query($sqlBill);
                         $latestBillData = $result1->fetch_assoc();
                         
@@ -68,7 +68,7 @@ require_once '../config.php'; // Include your database configuration
                                 $billItemColor = 'rgb(23, 89, 74)'; // Bill has no associated bill items (rgb(23, 89, 74))
                             }
 
-                            $paymentTimeQuery = "SELECT payment_time FROM Bills WHERE bill_id = $latestBillID";
+                            $paymentTimeQuery = "SELECT payment_time FROM bills WHERE bill_id = $latestBillID";
                             $paymentTimeResult = $link->query($paymentTimeQuery);
                             $hasPaymentTime = false;
 

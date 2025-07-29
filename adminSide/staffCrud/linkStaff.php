@@ -29,7 +29,7 @@
 
 
             // Query to retrieve accounts without staff assigned
-            $accountQuery = "SELECT account_id FROM Accounts WHERE staff_id IS NULL";
+            $accountQuery = "SELECT account_id FROM accounts WHERE staff_id IS NULL";
             $accountResult = $conn->query($accountQuery);
 
             while ($row = $accountResult->fetch_assoc()) {
@@ -55,7 +55,7 @@
             }
 
             // Query to retrieve staffs not used by any account
-            $staffQuery = "SELECT staff_id FROM Staffs WHERE staff_id NOT IN (SELECT staff_id FROM Accounts WHERE staff_id IS NOT NULL)";
+            $staffQuery = "SELECT staff_id FROM staffs WHERE staff_id NOT IN (SELECT staff_id FROM accounts WHERE staff_id IS NOT NULL)";
             $staffResult = $conn->query($staffQuery);
 
             while ($row = $staffResult->fetch_assoc()) {

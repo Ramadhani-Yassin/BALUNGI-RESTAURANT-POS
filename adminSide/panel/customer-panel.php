@@ -41,34 +41,34 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         // Modified query to search memberships by member_name or member_id
                         /*
                         $sql = "SELECT *
-                                FROM Memberships M
-                                INNER JOIN Accounts A ON M.account_id = A.account_id
+                                FROM memberships M
+                                INNER JOIN accounts A ON M.account_id = A.account_id
                                 WHERE M.member_name LIKE '%$search%' OR M.member_id = '$search'
                                 ORDER BY M.member_id";
                          */
-                        $sql = "SELECT * FROM Memberships WHERE member_name LIKE '%$search%' OR member_id = '$search'ORDER BY member_id";
+                        $sql = "SELECT * FROM memberships WHERE member_name LIKE '%$search%' OR member_id = '$search'ORDER BY member_id";
                     } else {
                         // Default query to fetch all memberships with account information
                          /* 
                          
                         $sql = "SELECT *
-                                FROM Memberships M
-                                INNER JOIN Accounts A ON M.account_id = A.account_id
+                                FROM memberships M
+                                INNER JOIN accounts A ON M.account_id = A.account_id
                                 ORDER BY M.member_id";
                          * 
                          */
-                        $sql = "SELECT * FROM Memberships ORDER BY member_id";
+                        $sql = "SELECT * FROM memberships ORDER BY member_id";
                     }
                 } else {
                     // Default query to fetch all memberships with account information
                     /*
                     $sql = "SELECT *
-                            FROM Memberships M
-                            INNER JOIN Accounts A ON M.account_id = A.account_id
+                            FROM memberships M
+                            INNER JOIN accounts A ON M.account_id = A.account_id
                             ORDER BY M.member_id";
                      * 
                      */
-                     $sql = "SELECT * FROM Memberships ORDER BY member_id";
+                     $sql = "SELECT * FROM memberships ORDER BY member_id";
                 }
 
 
@@ -96,7 +96,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             //echo "<td>" . $row['email'] . "</td>";
                             //echo "<td>" . $row['phone_number'] . "</td>";
                           //  echo "<td>";
-                         //   $deleteSQL = "DELETE FROM Memberships WHERE member_id = '" . $row['member_id'] . "';";
+                         //   $deleteSQL = "DELETE FROM memberships WHERE member_id = '" . $row['member_id'] . "';";
                          //   echo '<a href="../customerCrud/deleteCustomerVerify.php?id=' . $row['member_id'] . '" title="Delete Record" data-toggle="tooltip" '
                          //           . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Member?\n\nThis will alter other modules related to this Member!\n\')"><span class="fa fa-trash text-black"></span></a>';
                           //  echo "</td>";

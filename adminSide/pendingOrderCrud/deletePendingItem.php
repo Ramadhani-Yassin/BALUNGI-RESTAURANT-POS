@@ -10,7 +10,7 @@ $order_id = $_GET['order_id'];
 $item_id = $_GET['item_id'];
 
 // Fetch item details before deletion using prepared statements
-$fetch_query = "SELECT pending_order_item_id, quantity, source, unit FROM PendingOrderItems WHERE order_id = ? AND item_id = ?";
+$fetch_query = "SELECT pending_order_item_id, quantity, source, unit FROM pendingorderitems WHERE order_id = ? AND item_id = ?";
 $stmt = mysqli_prepare($link, $fetch_query);
 mysqli_stmt_bind_param($stmt, "ss", $order_id, $item_id);
 mysqli_stmt_execute($stmt);
@@ -29,7 +29,7 @@ $unit = $item_row['unit'] ?? 'base';
 // Fetch item category if it's a menu item
 $item_category = null;
 if ($source === 'menu') {
-    $category_query = "SELECT item_category FROM Menu WHERE item_id = ?";
+    $category_query = "SELECT item_category FROM menu WHERE item_id = ?";
     $stmt = mysqli_prepare($link, $category_query);
     mysqli_stmt_bind_param($stmt, "s", $item_id);
     mysqli_stmt_execute($stmt);
@@ -46,7 +46,7 @@ mysqli_begin_transaction($link);
 
 try {
     // Delete the specific item from PendingOrderItems using the primary key
-    $delete_query = "DELETE FROM PendingOrderItems WHERE pending_order_item_id = ?";
+    $delete_query = "DELETE FROM pendingorderitems WHERE pending_order_item_id = ?";
     $stmt = mysqli_prepare($link, $delete_query);
     mysqli_stmt_bind_param($stmt, "i", $pending_order_item_id);
     
@@ -87,11 +87,10 @@ try {
                 
                 $update_stock_query = "UPDATE stock SET 
                                      BaseUnitQuantity = ?, 
-                                     AggregateQuantity = ?, 
                                      PendingAggregate = ? 
                                      WHERE ItemID = ?";
                 $stmt = mysqli_prepare($link, $update_stock_query);
-                mysqli_stmt_bind_param($stmt, "iiis", $new_base_quantity, $new_aggregate_quantity, $new_pending_aggregate, $item_id);
+                mysqli_stmt_bind_param($stmt, "iis", $new_base_quantity, $new_pending_aggregate, $item_id);
             }
 
             if (!mysqli_stmt_execute($stmt)) {
@@ -104,7 +103,7 @@ try {
 
     // Handle kitchen items if it's a main dish
     if ($source === 'menu' && isset($item_category) && strtolower($item_category) === 'main dishes') {
-        $update_kitchen_query = "UPDATE Kitchen SET quantity = quantity - ? WHERE item_id = ?";
+        $update_kitchen_query = "UPDATE kitchen SET quantity = quantity - ? WHERE item_id = ?";
         $stmt = mysqli_prepare($link, $update_kitchen_query);
         mysqli_stmt_bind_param($stmt, "is", $quantity, $item_id);
         
@@ -113,7 +112,7 @@ try {
         }
 
         // Delete if quantity reaches zero
-        $check_query = "SELECT quantity FROM Kitchen WHERE item_id = ?";
+        $check_query = "SELECT quantity FROM kitchen WHERE item_id = ?";
         $stmt = mysqli_prepare($link, $check_query);
         mysqli_stmt_bind_param($stmt, "s", $item_id);
         mysqli_stmt_execute($stmt);
@@ -122,7 +121,7 @@ try {
         if ($check_result && mysqli_num_rows($check_result) > 0) {
             $check_row = mysqli_fetch_assoc($check_result);
             if ($check_row['quantity'] <= 0) {
-                $delete_query = "DELETE FROM Kitchen WHERE item_id = ?";
+                $delete_query = "DELETE FROM kitchen WHERE item_id = ?";
                 $stmt = mysqli_prepare($link, $delete_query);
                 mysqli_stmt_bind_param($stmt, "s", $item_id);
                 mysqli_stmt_execute($stmt);

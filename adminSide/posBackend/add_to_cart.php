@@ -67,9 +67,9 @@ if ($source === 'stock') {
             }
 
             // Update stock values using a prepared statement
-            $update_stock_query = "UPDATE stock SET BaseUnitQuantity = ?, AggregateQuantity = ?, PendingAggregate = ? WHERE ItemID = ?";
+                            $update_stock_query = "UPDATE stock SET BaseUnitQuantity = ?, PendingAggregate = ? WHERE ItemID = ?";
             $update_stmt = mysqli_prepare($link, $update_stock_query);
-            mysqli_stmt_bind_param($update_stmt, "iiis", $new_base_quantity, $new_aggregate_quantity, $new_pending_aggregate, $item_id);
+                          mysqli_stmt_bind_param($update_stmt, "iis", $new_base_quantity, $new_pending_aggregate, $item_id);
             mysqli_stmt_execute($update_stmt);
             
             // Commit the transaction if everything is successful
@@ -90,16 +90,16 @@ if ($source === 'stock') {
 
 
 // Check if the item already exists in the bill_items table
-$existingItemQuery = "SELECT * FROM Bill_Items WHERE bill_id = $bill_id AND item_id = '$item_id'";
+$existingItemQuery = "SELECT * FROM bill_items WHERE bill_id = $bill_id AND item_id = '$item_id'";
 $existingItemResult = mysqli_query($link, $existingItemQuery);
 
 if (mysqli_num_rows($existingItemResult) > 0) {
     // Item already exists; increase the quantity
-    $updateQuantityQuery = "UPDATE Bill_Items SET quantity = quantity + $quantity WHERE bill_id = $bill_id AND item_id = '$item_id'";
+    $updateQuantityQuery = "UPDATE bill_items SET quantity = quantity + $quantity WHERE bill_id = $bill_id AND item_id = '$item_id'";
     mysqli_query($link, $updateQuantityQuery);
 } else {
     // Item doesn't exist; create a new bill item
-    $insertItemQuery = "INSERT INTO Bill_Items (bill_id, item_id, quantity) VALUES ($bill_id, '$item_id', $quantity)";
+    $insertItemQuery = "INSERT INTO bill_items (bill_id, item_id, quantity) VALUES ($bill_id, '$item_id', $quantity)";
     mysqli_query($link, $insertItemQuery);
 }
 

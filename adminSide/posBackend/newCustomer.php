@@ -21,9 +21,9 @@
 
         // Insert into Bills table with optional table_id
         if ($table_id !== null) {
-            $insertQuery = "INSERT INTO Bills (table_id, bill_time) VALUES ('$table_id', '$bill_time')";
+            $insertQuery = "INSERT INTO bills (table_id, bill_time) VALUES ('$table_id', '$bill_time')";
         } else {
-            $insertQuery = "INSERT INTO Bills (bill_time) VALUES ('$bill_time')"; // No table_id
+            $insertQuery = "INSERT INTO bills (bill_time) VALUES ('$bill_time')"; // No table_id
         }
 
         if ($link->query($insertQuery) === TRUE) {

@@ -52,7 +52,7 @@ if (!$staff_result) {
                                            bi.source, 
                                            bi.unit
                                     FROM bill_items bi
-                                    LEFT JOIN Menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
+                                    LEFT JOIN menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
                                     LEFT JOIN stock s ON bi.item_id = s.ItemID AND bi.source = 'stock'
                                     WHERE bi.bill_id = '$bill_id'
                                     UNION
@@ -61,10 +61,10 @@ if (!$staff_result) {
                                            poi.quantity, 
                                            poi.source, 
                                            poi.unit
-                                    FROM PendingOrderItems poi
-                                    LEFT JOIN Menu m ON poi.item_id = m.item_id AND poi.source = 'menu'
+                                    FROM pendingorderitems poi
+                                    LEFT JOIN menu m ON poi.item_id = m.item_id AND poi.source = 'menu'
                                     LEFT JOIN stock s ON poi.item_id = s.ItemID AND poi.source = 'stock'
-                                    WHERE poi.order_id = (SELECT order_id FROM PendingOrders WHERE bill_id = '$bill_id')
+                                    WHERE poi.order_id = (SELECT order_id FROM pendingorders WHERE bill_id = '$bill_id')
                                 ";
                                 $cart_result = mysqli_query($link, $cart_query);
 
@@ -113,13 +113,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pay_done'])) {
     $currentTime = date('Y-m-d H:i:s');
 
     // Update the bill with compo payment information
-    $updateQuery = "UPDATE Bills SET payment_method = 'compo', payment_time = '$currentTime',
+    $updateQuery = "UPDATE bills SET payment_method = 'compo', payment_time = '$currentTime',
                     staff_id = $staff_id, member_id = $member_id, reservation_id = $reservation_id,
                     authorizing_staff_id = $authorizing_staff_id WHERE bill_id = $bill_id;";
 
     if ($link->query($updateQuery) === TRUE) {
         // Log the compo payment (optional)
-        $logQuery = "INSERT INTO CompoLogs (bill_id, authorizing_staff_id, compo_time)
+        $logQuery = "INSERT INTO compologs (bill_id, authorizing_staff_id, compo_time)
                      VALUES ('$bill_id', '$authorizing_staff_id', '$currentTime');";
         $link->query($logQuery);
 

@@ -9,7 +9,7 @@ if (isset($_GET['action']) && isset($_GET['kitchen_id'])) {
     
     if ($action === 'set_time_ended') {
         $currentTime = date('Y-m-d H:i:s');
-        $updateQuery = "UPDATE Kitchen SET time_ended = '$currentTime' WHERE kitchen_id = $kitchen_id";
+        $updateQuery = "UPDATE kitchen SET time_ended = '$currentTime' WHERE kitchen_id = $kitchen_id";
         if ($link->query($updateQuery) === TRUE) {
             header("Location: ../../panel/kitchen-panel.php"); // Redirect back to kitchen panel
 
@@ -23,13 +23,13 @@ if (isset($_GET['action']) && isset($_GET['kitchen_id'])) {
 }
 
 if (isset($_GET['UndoUnshow'])) {
-        $selectQuery = "SELECT kitchen_id FROM Kitchen WHERE  ORDER BY time_ended DESC";
+        $selectQuery = "SELECT kitchen_id FROM kitchen WHERE  ORDER BY time_ended DESC";
 
         $selectResult = $link->query($selectQuery);
         if ($selectResult && $selectResult->num_rows > 0) {
             $row = $selectResult->fetch_assoc();
             $time_submitted = $row['time_submitted'];
-            $updateQuery = "UPDATE Kitchen SET time_ended = NULL WHERE time_submitted = '$time_submitted'";
+            $updateQuery = "UPDATE kitchen SET time_ended = NULL WHERE time_submitted = '$time_submitted'";
             if ($link->query($updateQuery) === TRUE) {
                 // Time ended undone successfully
             } else {

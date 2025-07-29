@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Insert Data into Accounts Table
-        $insert_account_query = "INSERT INTO Accounts (account_id, email, register_date, phone_number, password) VALUES (?, ?, ?, ?, ?)";
+        $insert_account_query = "INSERT INTO accounts (account_id, email, register_date, phone_number, password) VALUES (?, ?, ?, ?, ?)";
         $stmt_account = $conn->prepare($insert_account_query);
         $stmt_account->bind_param("issss", $account_id, $email, $register_date, $phone_number, $password);
 
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Insert Data into Memberships Table
-        $insert_membership_query = "INSERT INTO Memberships (member_id, member_name, points, account_id) VALUES (?, ?, ?, ?)";
+        $insert_membership_query = "INSERT INTO memberships (member_id, member_name, points, account_id) VALUES (?, ?, ?, ?)";
         $stmt_membership = $conn->prepare($insert_membership_query);
         $stmt_membership->bind_param("issi", $member_id, $member_name, $points, $account_id);
 

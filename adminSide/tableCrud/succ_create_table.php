@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
 
     // Prepare the SQL query to check if the table_id already exists
-    $check_query = "SELECT table_id FROM Restaurant_Tables  WHERE table_id = ?";
+    $check_query = "SELECT table_id FROM restaurant_tables  WHERE table_id = ?";
     $check_stmt = $conn->prepare($check_query);
     $check_stmt->bind_param("s", $table_id);
     $check_stmt->execute();
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // ... (previous code)
 
 // Prepare the SQL query for insertion
-$insert_query = "INSERT INTO Restaurant_Tables (table_id, capacity, is_available) 
+$insert_query = "INSERT INTO restaurant_tables (table_id, capacity, is_available) 
                 VALUES (?, ?, ?)";
 $stmt = $conn->prepare($insert_query);
 

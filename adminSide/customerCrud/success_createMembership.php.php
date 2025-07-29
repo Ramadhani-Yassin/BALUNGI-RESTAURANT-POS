@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $points = $_POST["points"];
 
     // Prepare the SQL query to check if the member_name already exists
-    $check_query = "SELECT member_name FROM Memberships WHERE member_name = ?";
+    $check_query = "SELECT member_name FROM memberships WHERE member_name = ?";
     $check_stmt = $conn->prepare($check_query);
     $check_stmt->bind_param("s", $member_name);
     $check_stmt->execute();
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bgColor = "#FFA7A7"; // Custom background color for error
     } else {
         // Prepare the SQL query for insertion
-        $insert_query = "INSERT INTO Memberships (member_name, points) 
+        $insert_query = "INSERT INTO memberships (member_name, points) 
                         VALUES (?, ?)";
         $stmt = $conn->prepare($insert_query);
 

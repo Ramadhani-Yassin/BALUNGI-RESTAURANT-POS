@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $account_id = intval($account_id);
     $staff_id = intval($staff_id);
 
-    $checkAccountQuery = "SELECT * FROM Accounts WHERE account_id = ?";
+    $checkAccountQuery = "SELECT * FROM accounts WHERE account_id = ?";
     $checkStaffQuery = "SELECT * FROM staffs WHERE staff_id = ?";
 
     // Use prepared statements
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Invalid staff ID. No matching staff found.";
     } else {
         // Check if the account already has a staff assigned
-        $existingStaffQuery = "SELECT staff_id FROM Accounts WHERE account_id = ?";
+        $existingStaffQuery = "SELECT staff_id FROM accounts WHERE account_id = ?";
         $existingStaffStmt = $conn->prepare($existingStaffQuery);
         $existingStaffStmt->bind_param("i", $account_id);
         $existingStaffStmt->execute();
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($existingStaffId !== null) {
             echo "Account already has a staff assigned.";
         } else {
-            $updateQuery = "UPDATE Accounts SET staff_id = ? WHERE account_id = ?";
+            $updateQuery = "UPDATE accounts SET staff_id = ? WHERE account_id = ?";
             $updateStmt = $conn->prepare($updateQuery);
             $updateStmt->bind_param("ii", $staff_id, $account_id);
 

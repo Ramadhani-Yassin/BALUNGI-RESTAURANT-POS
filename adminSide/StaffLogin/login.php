@@ -3,6 +3,11 @@ session_start();
 if(isset($_SESSION['logged_account_id'])) {
     header("Location: ../panel/pos-panel.php");
 }
+
+// Initialize variables to prevent undefined variable errors
+$login_err = "";
+$account_id = "";
+$password_err = "";
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +43,7 @@ if(isset($_SESSION['logged_account_id'])) {
     <p>&nbsp;&nbsp;&nbsp;</p> 
     <section id="signup">
     <div class="container my-6 ">
-    <a class="nav-link" href="../../customerSide/home/home.php"> <h1 class="text-center" style="font-family:Copperplate; color:white;"> BALUNGI</h1><span class="sr-only"></span></a>
+    <a class="nav-link" href="../../customerSide/home/home.php"> <h1 class="text-center" style="font-family:Copperplate; color:white;"> CAFÉ MARUU</h1><span class="sr-only"></span></a>
 
     
     <div class="wrapper">

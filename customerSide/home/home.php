@@ -2,13 +2,13 @@
 <!-- Hero Section with Video Background and Text Overlay -->
 <section id="hero" style="position: relative;">
     
-<img src="../image/BALUNGI (1).jpg" alt="Steak on Grill" 
+<img src="../image/CAFE-MARUU.jpg" alt="Steak on Grill" 
      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(60%);">
      
     <div class="hero container" style="position: relative; z-index: 1;">
         <div>
-            <h1><strong><h1 class="text-center" style="font-family:Copperplate; color:whitesmoke;"> BALUNGI RESTAURANT</h1><span></span></strong></h1>
-            <h1><strong style="color:white;">DINING & BAR<span></span></strong></h1>
+            <h1><strong><h1 class="text-center" style="font-family:Copperplate; color:whitesmoke;"> CAFÉ MARUU</h1><span></span></strong></h1>
+            <h1><strong style="color:white;">COFFEE & DINING<span></span></strong></h1>
             <a href="#projects" type="button" class="cta">MENU</a>
         </div>
     </div>
@@ -26,7 +26,7 @@
 
     <!-- Category Selector (Optional) -->
     <select style="text-align:center;" id="menu-category" class="menu-category">
-      <option value="blue">Welcome to Balungi's Menu</option>
+      <option value="blue">Welcome to Café Maruu's Menu</option>
       <option value="yellow">MAIN DISHES</option>
       <!-- Comment out Side Dishes and Drinks options -->
       <!-- <option value="red">SIDE DISHES</option> -->
@@ -132,14 +132,14 @@
   <div class="about container">
     <div class="col-right">
         <h1 class="section-title" >About <span>Us</span></h1>
-        <h2>Balungi's DINING & BAR Company History:</h2>
- <p>Balungi Dining & Bar is a well-established Western food establishment in the city's heart. Balungi's Dining & Bar has become a popular choice for customers looking to celebrate special occasions or simply enjoy a relaxing meal, with a focus on providing delicious meals and a friendly dining experience.
+        <h2>Welcome to Café Maruu</h2>
+ <p>Welcome to Café Maruu, nestled in the heart of Marumbi, Zanzibar—a true paradise for food lovers and coffee enthusiasts! Located along the serene coastline, our café offers a perfect blend of exquisite flavors, soothing ambiance, and the unparalleled beauty of Zanzibar. Whether you're seeking a place to relax with a cup of freshly brewed coffee or indulge in mouthwatering meals, Café Maruu promises an unforgettable experience.
  </p>
- <p>Balungi Dining & Bar, as a Zanzibar restaurant, offers a diverse menu that caters to a variety of tastes. The menu includes a wide range of options such as bar bites, salads, soups and a variety of main courses. Customers can savour succulent options such as steak and ribs, chicken, lamb, seafood, burgers and sandwiches, pasta, and a variety of delectable side dishes. The menu has been carefully curated to offer a balance of classic favourites and innovative creations, ensuring that every palate is satisfied.
+ <p>At Café Maruu, we take pride in offering premium services to ensure every visit is memorable. Savor the rich aroma and bold flavors of our handpicked coffee blends. Every cup is crafted with love, offering the perfect balance of freshness and taste to delight your senses.
  </p>
- <p>Balungi Dining & Bar's ability to accommodate customers is one of its distinguishing features. Balungi's Dining & Bar strives to create an inviting and comfortable dining environment, whether guests prefer to walk in or make reservations in advance. The restaurant recognises the significance of creating memorable experiences, particularly for those celebrating special occasions. Johnny's Dining & Bar is a popular choice for families, couples, and groups of friends because of its attentive staff and welcoming atmosphere.
+ <p>Enjoy a menu that celebrates both local and international cuisine, with dishes crafted to perfection using the freshest ingredients Zanzibar has to offer. From tantalizing seafood platters to hearty breakfasts, we cater to all tastes. Step into a cozy, tranquil atmosphere where the sound of the waves complements every bite and sip.
  </p>
- <p>Balungi Dining & Bar has an inviting outdoor bar that is open seven days a week from 11:00 AM to 10:00 PM in addition to the indoor dining area.This outdoor space provides a relaxed setting for patrons to unwind and socialise while sipping on their favourite drinks and nibbling on bar bites. The bar serves a wide range of beverages, including cocktails, wines, beers and non-alcoholic options.
+ <p>Whether you're dining indoors or enjoying the coastal breeze on our outdoor terrace, the experience is unmatched. Our team ensures every guest feels at home with friendly and attentive service, while you enjoy stunning views of the Indian Ocean.
  </p>
     
       </div>
@@ -159,7 +159,7 @@
         <div class="contact-info">
           <div class='icon'><img src="../image/icons8-phone-100.png" alt=""/></div>
           <h1>Phone</h1>
-          <h2>+255 624 886 786</h2>
+          <h2>+255 676 456 679</h2>
         </div>
       </div>
       
@@ -167,7 +167,7 @@
         <div class="contact-info">
           <div class='icon'><img src="../image/icons8-email-100.png" alt=""/></div>
           <h1>Email</h1>
-          <h2>balungi@gmail.com</h2> 
+          <h2>cafemaruu@gmail.com</h2> 
         </div>
       </div>
       
@@ -175,7 +175,7 @@
         <div class="contact-info">
           <div class='icon'> <img src="../image/icons8-home-address-100.png" alt=""/></div>
           <h1>Address</h1>
-          <h2>Uroa Zanzibar</h2>
+          <h2>Marumbi, Zanzibar</h2>
         </div>
       </div>
     </div>

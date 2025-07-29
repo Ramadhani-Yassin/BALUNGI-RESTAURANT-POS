@@ -41,34 +41,34 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         // Modified query to search staff members by staff_name or staff_id
                         /*
                         $sql = "SELECT *
-                                FROM Staffs stf
-                                INNER JOIN Accounts acc ON stf.account_id = acc.account_id
+                                FROM staffs stf
+                                INNER JOIN accounts acc ON stf.account_id = acc.account_id
                                 WHERE stf.staff_name LIKE '%$search%' OR stf.staff_id = '$search'
                                 ORDER BY stf.staff_id";
                          * 
                          */
-                        $sql = "SELECT * FROM Staffs WHERE staff_name LIKE '%$search%' OR staff_id = '$search' ORDER BY account_id";
+                        $sql = "SELECT * FROM staffs WHERE staff_name LIKE '%$search%' OR staff_id = '$search' ORDER BY account_id";
                     } else {
                         // Default query to fetch all staff members
                         /*
                         $sql = "SELECT *
-                                FROM Staffs stf
-                                INNER JOIN Accounts acc ON stf.account_id = acc.account_id
+                                FROM staffs stf
+                                INNER JOIN accounts acc ON stf.account_id = acc.account_id
                                 ORDER BY stf.staff_id";
                          * 
                          */
-                        $sql = "SELECT * FROM Staffs ORDER BY account_id";
+                        $sql = "SELECT * FROM staffs ORDER BY account_id";
                     }
                 } else {
                     // Default query to fetch all staff members
                     /*
                     $sql = "SELECT *
-                            FROM Staffs stf
-                            INNER JOIN Accounts acc ON stf.account_id = acc.account_id
+                            FROM staffs stf
+                            INNER JOIN accounts acc ON stf.account_id = acc.account_id
                             ORDER BY stf.staff_id";
                      * 
                      */
-                    $sql = "SELECT * FROM Staffs ORDER BY account_id";
+                    $sql = "SELECT * FROM staffs ORDER BY account_id";
                 }
 
 

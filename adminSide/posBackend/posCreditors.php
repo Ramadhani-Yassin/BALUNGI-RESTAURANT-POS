@@ -9,7 +9,7 @@ $member_id = $_GET['member_id'];
 $reservation_id = $_GET['reservation_id'];
 
 // Fetch creditors from the database
-$creditors_query = "SELECT ID, Name FROM Creditors";
+$creditors_query = "SELECT ID, Name FROM creditors";
 $creditors_result = mysqli_query($link, $creditors_query);
 
 ?>
@@ -52,7 +52,7 @@ $creditors_result = mysqli_query($link, $creditors_query);
                                            bi.source, 
                                            bi.unit
                                     FROM bill_items bi
-                                    LEFT JOIN Menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
+                                    LEFT JOIN menu m ON bi.item_id = m.item_id AND bi.source = 'menu'
                                     LEFT JOIN stock s ON bi.item_id = s.ItemID AND bi.source = 'stock'
                                     WHERE bi.bill_id = '$bill_id'
                                     UNION
@@ -62,10 +62,10 @@ $creditors_result = mysqli_query($link, $creditors_query);
                                            poi.quantity, 
                                            poi.source, 
                                            poi.unit
-                                    FROM PendingOrderItems poi
-                                    LEFT JOIN Menu m ON poi.item_id = m.item_id AND poi.source = 'menu'
+                                    FROM pendingorderitems poi
+                                    LEFT JOIN menu m ON poi.item_id = m.item_id AND poi.source = 'menu'
                                     LEFT JOIN stock s ON poi.item_id = s.ItemID AND poi.source = 'stock'
-                                    WHERE poi.order_id = (SELECT order_id FROM PendingOrders WHERE bill_id = '$bill_id')
+                                    WHERE poi.order_id = (SELECT order_id FROM pendingorders WHERE bill_id = '$bill_id')
                                 ";
                                 $cart_result = mysqli_query($link, $cart_query);
                                 $cart_total = 0;
@@ -128,13 +128,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pay_done'])) {
     $currentTime = date('Y-m-d H:i:s');
 
     // Update the bill with creditor information
-    $updateQuery = "UPDATE Bills SET payment_method = 'creditor', payment_time = '$currentTime',
+    $updateQuery = "UPDATE bills SET payment_method = 'creditor', payment_time = '$currentTime',
                     staff_id = $staff_id, member_id = $member_id, reservation_id = $reservation_id,
                     creditor_id = $creditor_id WHERE bill_id = $bill_id;";
 
     if ($link->query($updateQuery) === TRUE) {
         // Update the creditor's due amount
-        $updateCreditorQuery = "UPDATE Creditors SET Due_Amount = Due_Amount + $GRANDTOTAL WHERE ID = $creditor_id;";
+        $updateCreditorQuery = "UPDATE creditors SET Due_Amount = Due_Amount + $GRANDTOTAL WHERE ID = $creditor_id;";
         $link->query($updateCreditorQuery);
 
         // JavaScript for automatic receipt download

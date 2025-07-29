@@ -44,14 +44,14 @@ require_once '../posBackend/checkIfLoggedIn.php';
                     if (!empty($_POST['search'])) {
                         $search = $_POST['search'];
 
-                        $sql = "SELECT * FROM Menu WHERE item_type LIKE '%$search%' OR item_category LIKE '%$search%' OR item_name LIKE '%$search%' OR item_id LIKE '%$search%' ORDER BY item_id;";
+                        $sql = "SELECT * FROM menu WHERE item_type LIKE '%$search%' OR item_category LIKE '%$search%' OR item_name LIKE '%$search%' OR item_id LIKE '%$search%' ORDER BY item_id;";
                     } else {
                         // Default query to fetch all items
-                        $sql = "SELECT * FROM Menu ORDER BY item_id;";
+                        $sql = "SELECT * FROM menu ORDER BY item_id;";
                     }
                 } else {
                     // Default query to fetch all items
-                    $sql = "SELECT * FROM Menu ORDER BY item_id;";
+                    $sql = "SELECT * FROM menu ORDER BY item_id;";
                 }
 
                 if ($result = mysqli_query($link, $sql)) {
@@ -80,7 +80,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             echo "<td>" . $row['item_description'] . "</td>";
                             echo "<td>";
                             // Modify link with the pencil icon
-                             $update_sql = "UPDATE Menu SET item_name=?, item_type=?, item_category=?, item_price=?, item_description=? WHERE item_id=?";
+                             $update_sql = "UPDATE menu SET item_name=?, item_type=?, item_category=?, item_price=?, item_description=? WHERE item_id=?";
                             echo '<a href="../menuCrud/updateItemVerify.php?id='. $row['item_id'] .'" title="Modify Record" data-toggle="tooltip"'
                                     . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to Edit this Item?\')">'
                              . '<i class="fa fa-pencil" aria-hidden="true"></i></a>';

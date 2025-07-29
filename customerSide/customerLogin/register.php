@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = trim($_POST["email"]);
     }
 
-    $selectCreatedEmail = "SELECT email from Accounts WHERE email = ?";
+    $selectCreatedEmail = "SELECT email from accounts WHERE email = ?";
 
     if($stmt = $link->prepare($selectCreatedEmail)){
         $stmt->bind_param("s", $_POST['email']);
@@ -66,9 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Start a transaction
         mysqli_begin_transaction($link);
 
-        // Prepare an insert statement for Accounts table
-      // Prepare an insert statement for Accounts table
-$sql_accounts = "INSERT INTO Accounts (email, password, phone_number, register_date) VALUES (?, ?, ?, NOW())";
+            // Prepare an insert statement for accounts table
+    // Prepare an insert statement for accounts table
+    $sql_accounts = "INSERT INTO accounts (email, password, phone_number, register_date) VALUES (?, ?, ?, NOW())";
 if ($stmt_accounts = mysqli_prepare($link, $sql_accounts)) {
     // Bind variables to the prepared statement as parameters
     mysqli_stmt_bind_param($stmt_accounts, "sss", $param_email, $param_password, $param_phone_number);
@@ -88,7 +88,7 @@ if ($stmt_accounts = mysqli_prepare($link, $sql_accounts)) {
                 $last_account_id = mysqli_insert_id($link);
 
                 // Prepare an insert statement for Memberships table
-                $sql_memberships = "INSERT INTO Memberships (member_name, points, account_id) VALUES (?, ?, ?)";
+                $sql_memberships = "INSERT INTO memberships (member_name, points, account_id) VALUES (?, ?, ?)";
                 if ($stmt_memberships = mysqli_prepare($link, $sql_memberships)) {
                     // Bind variables to the prepared statement as parameters
                     mysqli_stmt_bind_param($stmt_memberships, "sii", $param_member_name, $param_points, $last_account_id);
@@ -206,7 +206,7 @@ if ($stmt_accounts = mysqli_prepare($link, $sql_accounts)) {
 <body>
     <div class="register-container">
     <div class="register_wrapper"> <!-- Updated class name -->
-        <a class="nav-link" href="../home/home.php#hero"> <h1 class="text-center" style="font-family:Copperplate; color:white;"> BALUNGI</h1><span class="sr-only"></span></a><br>
+        <a class="nav-link" href="../home/home.php#hero"> <h1 class="text-center" style="font-family:Copperplate; color:white;"> CAFÉ MARUU</h1><span class="sr-only"></span></a><br>
        
         <form action="register.php" method="post">
             <div class="form-group">

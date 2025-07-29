@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = $link;
 
     // Prepare the SQL query to check if the item_id already exists
-    $check_query = "SELECT item_id FROM Menu WHERE item_id = ?";
+    $check_query = "SELECT item_id FROM menu WHERE item_id = ?";
     $check_stmt = $conn->prepare($check_query);
     $check_stmt->bind_param("s", $item_id);
     $check_stmt->execute();
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bgColor = "#FFA7A7"; // Custom background color for error
     } else {
         // Prepare the SQL query for insertion
-        $insert_query = "INSERT INTO Menu (item_id, item_name, item_type, item_category, item_price, item_description) 
+        $insert_query = "INSERT INTO menu (item_id, item_name, item_type, item_category, item_price, item_description) 
                         VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insert_query);
 

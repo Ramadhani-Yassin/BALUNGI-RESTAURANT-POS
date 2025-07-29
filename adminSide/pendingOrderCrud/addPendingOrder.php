@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $order_date = date('Y-m-d H:i:s');
 
     // Insert the pending order without a bill_id
-    $insert_query = "INSERT INTO PendingOrders (customer_name, order_date, status) 
+    $insert_query = "INSERT INTO pendingorders (customer_name, order_date, status) 
                      VALUES ('$customer_name', '$order_date', 'Pending')";
     if (mysqli_query($link, $insert_query)) {
         $order_id = mysqli_insert_id($link);

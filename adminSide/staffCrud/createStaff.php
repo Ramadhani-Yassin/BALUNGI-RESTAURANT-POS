@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
 
 // Function to get the next available account ID
 function getNextAvailableAccountID($conn) {
-    $sql = "SELECT MAX(account_id) as max_account_id FROM Accounts";
+    $sql = "SELECT MAX(account_id) as max_account_id FROM accounts";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $next_account_id = $row['max_account_id'] + 1;
@@ -39,7 +39,7 @@ function getNextAvailableAccountID($conn) {
 
 // Function to get the next available Staff ID
 function getNextAvailableStaffID($conn) {
-    $sql = "SELECT MAX(staff_id) as max_staff_id FROM Staffs";
+    $sql = "SELECT MAX(staff_id) as max_staff_id FROM staffs";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $next_staff_id = $row['max_staff_id'] + 1;

@@ -7,7 +7,7 @@ require_once '../config.php'; // Include database configuration
 date_default_timezone_set('Africa/Nairobi');
 
 // Fetch all stock items
-$sql = "SELECT * FROM Stock ORDER BY ItemID";
+$sql = "SELECT * FROM stock ORDER BY ItemID";
 $result = mysqli_query($link, $sql);
 
 // Initialize PDF
@@ -16,7 +16,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
 
 // Header
-$pdf->Cell(0, 10, "BALUNGI Restaurant - Stock Report", 0, 1, 'C');
+$pdf->Cell(0, 10, "Cafe Maruu Restaurant - Stock Report", 0, 1, 'C');
 $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, 'Generated on: ' . date('Y-m-d H:i:s'), 0, 1, 'L');
 $pdf->Ln();

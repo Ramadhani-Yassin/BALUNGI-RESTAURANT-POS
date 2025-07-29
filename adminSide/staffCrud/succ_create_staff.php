@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Insert Data into Accounts Table
-        $insert_account_query = "INSERT INTO Accounts (account_id, email, register_date, phone_number, password) VALUES (?, ?, ?, ?, ?)";
+        $insert_account_query = "INSERT INTO accounts (account_id, email, register_date, phone_number, password) VALUES (?, ?, ?, ?, ?)";
         $stmt_account = $conn->prepare($insert_account_query);
         $stmt_account->bind_param("issss", $account_id, $email, $register_date, $phone_number, $password);
 
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Insert Data into Staffs Table
-        $insert_staff_query = "INSERT INTO Staffs (staff_id, staff_name, role, account_id) VALUES (?, ?, ?, ?)";
+        $insert_staff_query = "INSERT INTO staffs (staff_id, staff_name, role, account_id) VALUES (?, ?, ?, ?)";
         $stmt_staff = $conn->prepare($insert_staff_query);
         $stmt_staff->bind_param("issi", $account_id, $staff_name, $role, $account_id);
 

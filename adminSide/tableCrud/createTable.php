@@ -13,7 +13,7 @@ $input_table_id = $table_id_err = $table_id = "";
 
 // Function to get the next available table id
 function getNextAvailableTableID($conn) {
-    $sql = "SELECT MAX(table_id) as max_table_id FROM Restaurant_Tables";
+    $sql = "SELECT MAX(table_id) as max_table_id FROM restaurant_tables";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $next_table_id = $row['max_table_id'] + 1;

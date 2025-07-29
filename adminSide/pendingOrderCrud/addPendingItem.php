@@ -15,9 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($order_id) || empty($item_id) || empty($quantity) || empty($source)) {
         die("All fields are required.");
     }
+    
+    // Validate unit value
+    if (!in_array($unit, ['base', 'aggregate'])) {
+        die("Invalid unit value. Must be 'base' or 'aggregate'. Received: '$unit'");
+    }
 
     // Fetch the pending order details
-    $order_query = "SELECT * FROM PendingOrders WHERE order_id = '$order_id'";
+    $order_query = "SELECT * FROM pendingorders WHERE order_id = '$order_id'";
     $order_result = mysqli_query($link, $order_query);
 
     if (!$order_result || mysqli_num_rows($order_result) === 0) {
@@ -30,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($order['bill_id'])) {
         // Create a new bill record
         $bill_time = date('Y-m-d H:i:s');
-        $insert_bill_query = "INSERT INTO Bills (table_id, bill_time) VALUES (" . ($table_id !== null ? "'$table_id'" : "NULL") . ", '$bill_time')";
+        $insert_bill_query = "INSERT INTO bills (table_id, bill_time) VALUES (" . ($table_id !== null ? "'$table_id'" : "NULL") . ", '$bill_time')";
 
         if (mysqli_query($link, $insert_bill_query)) {
             $bill_id = mysqli_insert_id($link);
-            $update_order_query = "UPDATE PendingOrders SET bill_id = '$bill_id' WHERE order_id = '$order_id'";
+            $update_order_query = "UPDATE pendingorders SET bill_id = '$bill_id' WHERE order_id = '$order_id'";
             if (!mysqli_query($link, $update_order_query)) {
                 die("Failed to update pending order with bill_id: " . mysqli_error($link));
             }
@@ -45,9 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bill_id = $order['bill_id'];
     }
 
+    // Initialize variables
+    $item_name = '';
+    $item_price = 0;
+    $item_category = '';
+    
     // Fetch item details based on the source and unit type
     if ($source === 'menu') {
-        $item_query = "SELECT item_name, item_price, item_category FROM Menu WHERE item_id = '$item_id'";
+        $item_query = "SELECT item_name, item_price, item_category FROM menu WHERE item_id = '$item_id'";
         $item_result = mysqli_query($link, $item_query);
         
         if (!$item_result || mysqli_num_rows($item_result) === 0) {
@@ -103,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($unit === 'base') {
                     if ($quantity > $base_quantity) {
                         echo "<script>
-                        alert('Not enough Items available on Balungi Stock ⚠️‼️.');
+                        alert('Not enough Items available on Café Maruu Stock ⚠️‼️.');
                         window.history.back();
                       </script>";
                 exit(); // Stop further execution
@@ -116,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 elseif ($unit === 'aggregate') {
                     if ($quantity > $aggregate_quantity) {
                         echo "<script>
-                        alert('Not enough Items available on Balungi Stock ⚠️‼️.');
+                        alert('Not enough Items available on Café Maruu Stock ⚠️‼️.');
                         window.history.back();
                       </script>";
                 exit(); // Stop further execution
@@ -127,15 +137,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $new_aggregate_quantity = $aggregate_quantity - $quantity;
 
                     // Add to pending aggregate buffer
-                    $pending_aggregate += $quantity;
+                    $new_pending_aggregate = $pending_aggregate + $quantity;
 
                     // Convert to base units if pending aggregates reach the threshold
-                    $converted_units = intdiv($pending_aggregate, $conversion_ratio);
-                    $remaining_pending = $pending_aggregate % $conversion_ratio;
+                    $converted_units = intdiv($new_pending_aggregate, $conversion_ratio);
+                    $remaining_pending = $new_pending_aggregate % $conversion_ratio;
 
                     // Reduce base units only when full conversion happens
                     $new_base_quantity = max(0, $base_quantity - $converted_units);
-                    $new_pending_aggregate = $pending_aggregate - $quantity;
+                    $new_pending_aggregate = $remaining_pending;
 
                 } 
                 else {
@@ -143,9 +153,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                 // Update stock with prepared statement
-                $update_stock_query = "UPDATE stock SET BaseUnitQuantity = ?, AggregateQuantity = ?, PendingAggregate = ? WHERE ItemID = ?";
+                $update_stock_query = "UPDATE stock SET BaseUnitQuantity = ?, PendingAggregate = ? WHERE ItemID = ?";
                 $update_stmt = mysqli_prepare($link, $update_stock_query);
-                mysqli_stmt_bind_param($update_stmt, "iiis", $new_base_quantity, $new_aggregate_quantity, $new_pending_aggregate, $item_id);
+                mysqli_stmt_bind_param($update_stmt, "iis", $new_base_quantity, $new_pending_aggregate, $item_id);
                 mysqli_stmt_execute($update_stmt);
                 
                 if (mysqli_stmt_affected_rows($update_stmt) === 0) {
@@ -162,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert the item into PendingOrderItems with prepared statement
-    $insert_query = "INSERT INTO PendingOrderItems 
+    $insert_query = "INSERT INTO pendingorderitems 
                     (order_id, item_id, item_name, quantity, source, unit, item_price) 
                     VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($link, $insert_query);
@@ -172,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // For menu items in 'Main Dishes' category
         if ($source === 'menu' && isset($item_category) && strtolower($item_category) === 'main dishes') {
             $currentTime = date('Y-m-d H:i:s');
-            $insert_kitchen_query = "INSERT INTO Kitchen (table_id, item_id, quantity, time_submitted) 
+            $insert_kitchen_query = "INSERT INTO kitchen (table_id, item_id, quantity, time_submitted) 
                                    VALUES (". ($table_id !== null ? "'$table_id'" : "NULL") .", '$item_id', '$quantity', '$currentTime')";
             if (!mysqli_query($link, $insert_kitchen_query)) {
                 error_log("Error inserting into Kitchen: " . mysqli_error($link));

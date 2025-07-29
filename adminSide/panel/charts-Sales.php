@@ -1,6 +1,7 @@
 <?php
 session_start(); // Ensure session is started
 require_once '../posBackend/checkIfLoggedIn.php';
+require_once '../../error_handler.php'; // Include custom error handler
 ?>
 <?php 
 include '../inc/dashHeader.php'; 
@@ -38,15 +39,18 @@ $currentMonth = date('Y-m');
                 
 
                 // Modify the SQL query for menu item sales to consider the current month
-                $menuItemSalesQuery = "SELECT Menu.item_name, SUM(Bill_Items.quantity) AS total_quantity
-                                       FROM Bill_Items
-                                       INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id
-                                       INNER JOIN Bills ON Bill_Items.bill_id = Bills.bill_id
-                                       WHERE Bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
-                                       GROUP BY Menu.item_name
+                $menuItemSalesQuery = "SELECT menu.item_name, SUM(bill_items.quantity) AS total_quantity
+                                       FROM bill_items
+                                       INNER JOIN menu ON bill_items.item_id = menu.item_id
+                                       INNER JOIN bills ON bill_items.bill_id = bills.bill_id
+                                       WHERE bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
+                                       GROUP BY menu.item_name
                                        ORDER BY total_quantity $sortOrder";
 
                 $menuItemSalesResult = mysqli_query($link, $menuItemSalesQuery);
+                if (!$menuItemSalesResult) {
+                    handleDatabaseError("Failed to fetch menu item sales: " . mysqli_error($link));
+                }
 
                 echo '<table class="table" >';
                 echo '<thead>';
@@ -110,15 +114,18 @@ $currentMonth = date('Y-m');
         const data = google.visualization.arrayToDataTable([
             ['Item Name', 'Total Quantity'],
             <?php
-            $topPurchasedItemsQuery = "SELECT Menu.item_name, SUM(Bill_Items.quantity) AS total_quantity
-                                        FROM Bill_Items
-                                        INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id
-                                        INNER JOIN Bills ON Bill_Items.bill_id = Bills.bill_id
-                                        WHERE Bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
-                                        GROUP BY Menu.item_name
+            $topPurchasedItemsQuery = "SELECT menu.item_name, SUM(bill_items.quantity) AS total_quantity
+                                        FROM bill_items
+                                        INNER JOIN menu ON bill_items.item_id = menu.item_id
+                                        INNER JOIN bills ON bill_items.bill_id = bills.bill_id
+                                        WHERE bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
+                                        GROUP BY menu.item_name
                                         ORDER BY total_quantity DESC
                                         LIMIT 10";
             $topPurchasedItemsResult = mysqli_query($link, $topPurchasedItemsQuery);
+            if (!$topPurchasedItemsResult) {
+                handleDatabaseError("Failed to fetch top purchased items: " . mysqli_error($link));
+            }
 
             while ($row = mysqli_fetch_assoc($topPurchasedItemsResult)) {
                 echo "['{$row['item_name']}', {$row['total_quantity']}],";
@@ -142,16 +149,19 @@ $currentMonth = date('Y-m');
         const data = google.visualization.arrayToDataTable([
             ['Item Name', 'Total Quantity'],
             <?php
-            $topPurchasedDrinksQuery = "SELECT Menu.item_name, SUM(Bill_Items.quantity) AS total_quantity
-                                        FROM Bill_Items
-                                        INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id
-                                        INNER JOIN Bills ON Bill_Items.bill_id = Bills.bill_id
-                                        WHERE Bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
-                                        AND Menu.item_category = 'Drinks'
-                                        GROUP BY Menu.item_name
+            $topPurchasedDrinksQuery = "SELECT menu.item_name, SUM(bill_items.quantity) AS total_quantity
+                                        FROM bill_items
+                                        INNER JOIN menu ON bill_items.item_id = menu.item_id
+                                        INNER JOIN bills ON bill_items.bill_id = bills.bill_id
+                                        WHERE bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
+                                        AND menu.item_category = 'Drinks'
+                                        GROUP BY menu.item_name
                                         ORDER BY total_quantity DESC
                                         LIMIT 10";
             $topPurchasedItemsResult = mysqli_query($link, $topPurchasedItemsQuery);
+            if (!$topPurchasedItemsResult) {
+                handleDatabaseError("Failed to fetch top purchased drinks: " . mysqli_error($link));
+            }
 
             while ($row = mysqli_fetch_assoc($topPurchasedItemsResult)) {
                 echo "['{$row['item_name']}', {$row['total_quantity']}],";
@@ -175,16 +185,19 @@ $currentMonth = date('Y-m');
         const data = google.visualization.arrayToDataTable([
             ['Item Name', 'Total Quantity'],
             <?php
-            $topPurchasedMainDishesQuery = "SELECT Menu.item_name, SUM(Bill_Items.quantity) AS total_quantity
-                                            FROM Bill_Items
-                                            INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id
-                                            INNER JOIN Bills ON Bill_Items.bill_id = Bills.bill_id
-                                            WHERE Bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
-                                            AND Menu.item_category = 'Main Dishes'
-                                            GROUP BY Menu.item_name
+            $topPurchasedMainDishesQuery = "SELECT menu.item_name, SUM(bill_items.quantity) AS total_quantity
+                                            FROM bill_items
+                                            INNER JOIN menu ON bill_items.item_id = menu.item_id
+                                            INNER JOIN bills ON bill_items.bill_id = bills.bill_id
+                                            WHERE bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
+                                            AND menu.item_category = 'Main Dishes'
+                                            GROUP BY menu.item_name
                                             ORDER BY total_quantity DESC
                                             LIMIT 10";
             $topPurchasedItemsResult = mysqli_query($link, $topPurchasedItemsQuery);
+            if (!$topPurchasedItemsResult) {
+                handleDatabaseError("Failed to fetch top purchased main dishes: " . mysqli_error($link));
+            }
 
             while ($row = mysqli_fetch_assoc($topPurchasedItemsResult)) {
                 echo "['{$row['item_name']}', {$row['total_quantity']}],";
@@ -208,16 +221,19 @@ $currentMonth = date('Y-m');
         const data = google.visualization.arrayToDataTable([
             ['Item Name', 'Total Quantity'],
             <?php
-            $topPurchasedSideSnacksQuery = "SELECT Menu.item_name, SUM(Bill_Items.quantity) AS total_quantity
-                                            FROM Bill_Items
-                                            INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id
-                                            INNER JOIN Bills ON Bill_Items.bill_id = Bills.bill_id
-                                            WHERE Bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
-                                            AND Menu.item_category = 'Side Snacks'
-                                            GROUP BY Menu.item_name
+            $topPurchasedSideSnacksQuery = "SELECT menu.item_name, SUM(bill_items.quantity) AS total_quantity
+                                            FROM bill_items
+                                            INNER JOIN menu ON bill_items.item_id = menu.item_id
+                                            INNER JOIN bills ON bill_items.bill_id = bills.bill_id
+                                            WHERE bills.bill_time BETWEEN '$currentMonthStart 00:00:00' AND '$currentMonthEnd 23:59:59'
+                                            AND menu.item_category = 'Side Snacks'
+                                            GROUP BY menu.item_name
                                             ORDER BY total_quantity DESC
                                             LIMIT 10";
             $topPurchasedItemsResult = mysqli_query($link, $topPurchasedItemsQuery);
+            if (!$topPurchasedItemsResult) {
+                handleDatabaseError("Failed to fetch top purchased side snacks: " . mysqli_error($link));
+            }
 
             while ($row = mysqli_fetch_assoc($topPurchasedItemsResult)) {
                 echo "['{$row['item_name']}', {$row['total_quantity']}],";

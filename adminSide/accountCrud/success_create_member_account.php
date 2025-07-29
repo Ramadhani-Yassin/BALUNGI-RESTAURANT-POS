@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $staff_id = isset($_POST["staff_id"]) ? $_POST["staff_id"] : null;
 
     // Prepare the SQL query to check if the item_id already exists
-    $check_query = "SELECT email FROM Accounts WHERE email = ?";
+    $check_query = "SELECT email FROM accounts WHERE email = ?";
     $check_stmt = $conn->prepare($check_query);
     $check_stmt->bind_param("s", $email);
     $check_stmt->execute();
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bgColor = "#FFA7A7"; // Custom background color for error
     } else {
             // Prepare the SQL query for insertion
-                $insert_query = "INSERT INTO Accounts (email, register_date, phone_number, password, membership_id, staff_id) 
+                $insert_query = "INSERT INTO accounts (email, register_date, phone_number, password, membership_id, staff_id) 
                     VALUES (?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($insert_query);
 
